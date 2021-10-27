@@ -7,9 +7,9 @@ document.body.style.background = "#9caeff"
 
 function App() {
   return (
-    
+
     <div className="App">
-      
+
       <div class="container">
         <div class="row">
           <div class="col align-self-center" className="gee"><svg xmlns="http://www.w3.org/2000/svg" width="4%" height="auto" fill="rgb(144, 0, 0)" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
@@ -31,21 +31,21 @@ function App() {
             <Form.Control type="password" placeholder="Password" />
           </Form.Group>
           <Form.Group className="lin1"><a href="">Forgot Password?</a></Form.Group>
-          
+
           <Form.Group className="but1">
             <Button variant="primary" type="submit" >
               Don't have an account?
-            </Button>  
+            </Button>
             <Button variant="primary" type="submit" className="but2">
               Login
-            </Button> 
-          </Form.Group>          
+            </Button>
+          </Form.Group>
 
         </Form>
-      </div>  
-      
+      </div>
 
-      {/* <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
+
+      {/*daha <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
 
       <script
         src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
