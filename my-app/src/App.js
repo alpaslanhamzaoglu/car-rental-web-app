@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import { Form, Button, Row } from 'react-bootstrap';
+import { Form, Button, Row, Container, Col } from 'react-bootstrap';
 
 document.body.style.background = "#9caeff"
 
@@ -21,41 +21,42 @@ function App() {
       </div>
 
       <div>
-        <Form>
-
-          <Form.Group className="form1" controlId="formBasicEmail">
-            <Form.Control type="email" placeholder="Email" />
-          </Form.Group>
-
-          <Form.Group className="form2" controlId="formBasicPassword">
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
-          <Form.Group className="lin1"><a href="">Forgot Password?</a></Form.Group>
-
-          <Form.Group className="but1">
-            <Button variant="primary" type="submit" >
-              Don't have an account?
-            </Button>
-            <Button variant="primary" type="submit" className="but2">
-              Login
-            </Button>
-          </Form.Group>
-
-        </Form>
+        <Container>
+          <Form>
+            <Row className="justify-content-md-center">
+              <Col xs lg="3">
+                <Form.Group className="emailform" controlId="formBasicEmail">
+                  <Form.Control type="email" placeholder="Email" />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="justify-content-md-center">
+              <Col xs lg="3">
+                <Form.Group className="passwordform" controlId="formBasicPassword">
+                  <Form.Control type="password" placeholder="Password" />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="justify-content-md-center">
+              <Col xs lg="3">
+                <Form.Group className="forgotpassword"><a href="">Forgot Password?</a></Form.Group>
+              </Col>
+            </Row>
+            <Row className="justify-content-md-center">
+              <Col xs lg="3">
+                <Form.Group className="dontbutton">
+                  <Button variant="primary" type="submit" >
+                    Don't have an account?
+                  </Button>
+                  <Button variant="primary" type="submit" className="loginbutton">
+                    Login
+                  </Button>
+                </Form.Group>
+              </Col>
+            </Row>
+          </Form>
+        </Container>
       </div>
-
-
-      {/*daha <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
-
-      <script
-        src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
-        crossorigin></script>
-
-      <script
-        src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
-        crossorigin></script>
-
-      <script>var Alert = ReactBootstrap.Alert;</script> */}
     </div>
   );
 }
