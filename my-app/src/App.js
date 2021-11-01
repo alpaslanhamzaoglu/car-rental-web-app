@@ -1,13 +1,21 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
+import Axios from 'axios'
 import { Form, Button, Row, Container, Col } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
 
 document.body.style.background = "#9caeff"
 
 function App() {
-  return (
 
+  const [uemail, setMail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const submitMail = () => {
+    Axios.post("http://localhost:3001/api/insert", {uemail: uemail, password: password}).then(()=> {alert("successfull");});
+  };
+
+  return (
     <div className="App">
 
       <div class="container">
@@ -26,14 +34,14 @@ function App() {
             <Row className="justify-content-md-center">
               <Col xs lg="3">
                 <Form.Group className="emailform" controlId="formBasicEmail">
-                  <Form.Control type="email" placeholder="Email" />
+                  <Form.Control type="email" placeholder="Email" onChange={(e) => { setMail(e.target.value) }} />
                 </Form.Group>
               </Col>
             </Row>
             <Row className="justify-content-md-center">
               <Col xs lg="3">
                 <Form.Group className="passwordform" controlId="formBasicPassword">
-                  <Form.Control type="password" placeholder="Password" />
+                  <Form.Control type="password" placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} />
                 </Form.Group>
               </Col>
             </Row>
@@ -48,7 +56,7 @@ function App() {
                   <Button variant="primary" type="submit" >
                     Don't have an account?
                   </Button>
-                  <Button variant="primary" type="submit" className="loginbutton">
+                  <Button variant="primary" type="submit" className="loginbutton" onClick={submitMail}>
                     Login
                   </Button>
                 </Form.Group>
