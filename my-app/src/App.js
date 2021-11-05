@@ -15,6 +15,8 @@ function App() {
     Axios.post("http://localhost:3001/login", { uemail: uemail, password: password }).then(() => { alert("successful"); }); // some comment
   };
 
+// don't forget to add required link for "forgot password"
+
   return (
     <div className="App">
 
@@ -47,7 +49,7 @@ function App() {
             </Row>
             <Row className="justify-content-md-center">
               <Col xs lg="3">
-                <Form.Group className="forgotpassword"><a href="">Forgot Password?</a></Form.Group>
+                <Form.Group className="forgotpassword"><a href="">Forgot Password?</a></Form.Group> 
               </Col>
             </Row>
             <Row className="justify-content-md-center">
