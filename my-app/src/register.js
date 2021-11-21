@@ -2,26 +2,27 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './register.css';
 import Axios from 'axios'
 import { Form, Button, Row, Container, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 
 document.body.style.background = "#9caeff"
 
-function App() {
+function Register() {
 
   const [uemail, setMail] = useState("");
   const [password, setPassword] = useState("");
+  const [pass_repeat, setPassRepeat] = useState("");
 
   const submitMail = () => {
-    Axios.post("http://localhost:3001/login", { uemail: uemail, password: password }).then(() => { alert("successful"); }); // some comment
+    //pass ve pass repeat aynı mı kontrol eklenecek
+    if(password == pass_repeat)
+        Axios.post("http://localhost:3001/register", { uemail: uemail, password: password , pass_repeat: pass_repeat}).then(() => { alert("successful"); });
   };
 
-// don't forget to add required link for "forgot password"
-
   return (
-    <div className="App">
+    <div className="Register">
 
       <div class="container">
         <div class="row">
@@ -52,17 +53,16 @@ function App() {
             </Row>
             <Row className="justify-content-md-center">
               <Col xs lg="3">
-                <Form.Group className="forgotpassword"><a href="">Forgot Password?</a></Form.Group> 
+                <Form.Group className="passwordrepeat" controlId="formBasicPassword">
+                  <Form.Control type="password" placeholder="Repeat Password" onChange={(e) => { setPassRepeat(e.target.value) }} />
+                </Form.Group>
               </Col>
             </Row>
             <Row className="justify-content-md-center">
               <Col xs lg="3">
-                <Form.Group className="dontbutton">
-                  <Button variant="primary" type="submit" >
-                    Don't have an account?
-                  </Button>
-                  <Button variant="primary" type="submit" className="loginbutton" onClick={submitMail}>
-                    Login
+                <Form.Group className="registerButton">
+                  <Button variant="primary" type="submit" className="registerbutton" onClick={submitMail}>
+                    Register
                   </Button>
                 </Form.Group>
               </Col>
@@ -74,4 +74,4 @@ function App() {
   );
 }
 
-export default App;
+export default Register;
