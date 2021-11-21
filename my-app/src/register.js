@@ -13,7 +13,7 @@ function App() {
   comst [pass_repeat, setPassRepeat] = useState("");
 
   const submitMail = () => {
-    Axios.post("http://localhost:3001/register", { uemail: uemail, password: password }).then(() => { alert("successful"); }); // some comment
+    Axios.post("http://localhost:3001/register", { uemail: uemail, password: password , pass_repeat: pass_repeat}).then(() => { alert("successful"); }); // some comment
   };
 
   return (
