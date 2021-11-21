@@ -1,3 +1,4 @@
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './register.css';
 import Axios from 'axios'
@@ -10,10 +11,12 @@ function Register() {
 
     const [uemail, setMail] = useState("");
     const [password, setPassword] = useState("");
-    comst[pass_repeat, setPassRepeat] = useState("");
+    const[pass_repeat, setPassRepeat] = useState("");
 
     const submitMail = () => {
-        Axios.post("http://localhost:3001/register", { uemail: uemail, password: password }).then(() => { alert("successful"); }); // some comment
+      //alttaki conditiona tekrar bak ilerde
+      if(pass_repeat == password)
+          Axios.post("http://localhost:3001/register", { uemail: uemail, password: password, pass_repeat: pass_repeat }).then(() => { alert("successful"); });
     };
 
     return (
@@ -49,23 +52,15 @@ function Register() {
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
                                 <Form.Group className="passwordrepeat" controlId="formBasicPassword">
-                                    <Form.Control type="password" placeholder="Password" onChange={(e) => { setPassRepeat(e.target.value) }} />
+                                    <Form.Control type="password" placeholder="Repeat Password" onChange={(e) => { setPassRepeat(e.target.value) }} />
                                 </Form.Group>
                             </Col>
                         </Row>
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
-                                <Form.Group className="forgotpassword"><a href="">Forgot Password?</a></Form.Group>
-                            </Col>
-                        </Row>
-                        <Row className="justify-content-md-center">
-                            <Col xs lg="3">
-                                <Form.Group className="dontbutton">
-                                    <Button variant="primary" type="submit" >
-                                        Don't have an account?
-                                    </Button>
-                                    <Button variant="primary" type="submit" className="loginbutton" onClick={submitMail}>
-                                        Login
+                                <Form.Group className="registerButton">
+                                    <Button variant="primary" type="submit" className="registerButton" onClick={submitMail}>
+                                        Register
                                     </Button>
                                 </Form.Group>
                             </Col>

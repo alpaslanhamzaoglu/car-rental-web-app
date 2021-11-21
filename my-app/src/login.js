@@ -1,3 +1,4 @@
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './login.css';
 import Axios from 'axios'
@@ -59,7 +60,7 @@ function Login() {
                 <Form.Group className="dontbutton">
                   <Button variant="primary" type="submit" 
                   onClick ={() => {
-                    navigate("/profile");
+                    navigate("/register");
                   }}>
                     Don't have an account?
                   </Button>
