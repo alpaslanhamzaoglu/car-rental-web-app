@@ -20,11 +20,6 @@
     transform: rotate(30deg);
   }
   
-  .loginbutton {
-    margin-left: 16%;
-    margin-top: 2%;
-  }
-  
   .forgotpassword {
     margin-left: 58%;
   }
@@ -40,4 +35,9 @@
 
   .passwordrepeat {
     margin-bottom: 2%;
+  }
+
+  .registerButton {
+      margin-bottom: 2%;
+      margin-left: 73%;
   }
