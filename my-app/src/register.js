@@ -16,7 +16,7 @@ function Register() {
   const [pass_repeat, setPassRepeat] = useState("");
 
   const submitMail = () => {
-    //pass ve pass repeat aynı mı kontrol eklenecek
+    //pass ve pass repeat aynı mı kontrol ekle
     if(password == pass_repeat)
         Axios.post("http://localhost:3001/register", { uemail: uemail, password: password , pass_repeat: pass_repeat}).then(() => { alert("successful"); });
   };
