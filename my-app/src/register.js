@@ -10,7 +10,7 @@ function Register() {
 
     const [uemail, setMail] = useState("");
     const [password, setPassword] = useState("");
-    comst[pass_repeat, setPassRepeat] = useState("");
+    const[pass_repeat, setPassRepeat] = useState("");
 
     const submitMail = () => {
         Axios.post("http://localhost:3001/register", { uemail: uemail, password: password }).then(() => { alert("successful"); }); // some comment

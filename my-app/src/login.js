@@ -59,7 +59,7 @@ function Login() {
                 <Form.Group className="dontbutton">
                   <Button variant="primary" type="submit" 
                   onClick ={() => {
-                    navigate("/profile");
+                    navigate("/register");
                   }}>
                     Don't have an account?
                   </Button>
