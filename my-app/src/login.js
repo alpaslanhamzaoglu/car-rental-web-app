@@ -3,10 +3,13 @@ import './login.css';
 import Axios from 'axios'
 import { Form, Button, Row, Container, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 document.body.style.background = "#9caeff"
 
 function Login() {
+  
+  const navigate = useNavigate();
 
     const [uemail, setMail] = useState("");
     const [password, setPassword] = useState("");
@@ -15,8 +18,9 @@ function Login() {
         Axios.post("http://localhost:3001/login", { uemail: uemail, password: password }).then(() => { alert("successful"); }); // some comment
     };
 
-    return (
-        <div className="App">
+  return (
+    <div className="Login">
+
 
             <div class="container">
                 <div class="row">
@@ -28,45 +32,48 @@ function Login() {
                 </div>
             </div>
 
-            <div>
-                <Container>
-                    <Form>
-                        <Row className="justify-content-md-center">
-                            <Col xs lg="3">
-                                <Form.Group className="emailform" controlId="formBasicEmail">
-                                    <Form.Control type="email" placeholder="Email" onChange={(e) => { setMail(e.target.value) }} />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row className="justify-content-md-center">
-                            <Col xs lg="3">
-                                <Form.Group className="passwordform" controlId="formBasicPassword">
-                                    <Form.Control type="password" placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row className="justify-content-md-center">
-                            <Col xs lg="3">
-                                <Form.Group className="forgotpassword"><a href="">Forgot Password?</a></Form.Group>
-                            </Col>
-                        </Row>
-                        <Row className="justify-content-md-center">
-                            <Col xs lg="3">
-                                <Form.Group className="dontbutton">
-                                    <Button variant="primary" type="submit" >
-                                        Don't have an account?
-                                    </Button>
-                                    <Button variant="primary" type="submit" className="loginbutton" onClick={submitMail}>
-                                        Login
-                                    </Button>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                    </Form>
-                </Container>
-            </div>
-        </div>
-    );
+      <div>
+        <Container>
+          <Form>
+            <Row className="justify-content-md-center">
+              <Col xs lg="3">
+                <Form.Group className="emailform" controlId="formBasicEmail">
+                  <Form.Control type="email" placeholder="Email" onChange={(e) => { setMail(e.target.value) }} />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="justify-content-md-center">
+              <Col xs lg="3">
+                <Form.Group className="passwordform" controlId="formBasicPassword">
+                  <Form.Control type="password" placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="justify-content-md-center">
+              <Col xs lg="3">
+                <Form.Group className="forgotpassword"><a href="">Forgot Password?</a></Form.Group>
+              </Col>
+            </Row>
+            <Row className="justify-content-md-center">
+              <Col xs lg="3">
+                <Form.Group className="dontbutton">
+                  <Button variant="primary" type="submit" 
+                  onClick ={() => {
+                    navigate("/profile");
+                  }}>
+                    Don't have an account?
+                  </Button>
+                  <Button variant="primary" type="submit" className="loginbutton" onClick={submitMail}>
+                    Login
+                  </Button>
+                </Form.Group>
+              </Col>
+            </Row>
+          </Form>
+        </Container>
+      </div>
+    </div>
+  );
 }
 
 export default Login;
