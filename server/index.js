@@ -15,14 +15,14 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.post("/register", (req, res) => {
-//     const uemail = req.body.uemail;
-//     const password = req.body.password;
-//     const sqlInsert = "INSERT INTO users (uemail, password) VALUES (?, ?)";
-//     db.query(sqlInsert, [uemail, password], (err, result) => {
-//         console.log(result);
-//     });
-// });
+app.post("/register", (req, res) => {
+    const uemail = req.body.uemail;
+    const password = req.body.password;
+    const sqlInsert = "INSERT INTO users (uemail, password) VALUES (?, ?)";
+    db.query(sqlInsert, [uemail, password], (err, result) => {
+        console.log(result);
+    });
+});
 
 app.post("/login", (req, res) => {
     const uemail = req.body.uemail;
