@@ -3,10 +3,13 @@ import './login.css';
 import Axios from 'axios'
 import { Form, Button, Row, Container, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 document.body.style.background = "#9caeff"
 
 function Login() {
+  
+  const navigate = useNavigate();
 
   const [uemail, setMail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +19,7 @@ function Login() {
   };
 
   return (
-    <div className="App">
+    <div className="Login">
 
       <div class="container">
         <div class="row">
@@ -53,7 +56,10 @@ function Login() {
             <Row className="justify-content-md-center">
               <Col xs lg="3">
                 <Form.Group className="dontbutton">
-                  <Button variant="primary" type="submit" >
+                  <Button variant="primary" type="submit" 
+                  onClick ={() => {
+                    navigate("/profile");
+                  }}>
                     Don't have an account?
                   </Button>
                   <Button variant="primary" type="submit" className="loginbutton" onClick={submitMail}>
