@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require("cors");
 const app = express();
 const mysql = require('mysql');
+const session = require('express-session');
 
 const db = mysql.createPool({
     host: "localhost",
@@ -11,9 +12,16 @@ const db = mysql.createPool({
     database: "aga"
 });
 
+let mail = "";
+
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+    secret: 'secret-key',
+    resave: false,
+    saveUninitialized: false,
+}));
 
 app.post("/register", (req, res) => {
     const uemail = req.body.uemail;
@@ -35,11 +43,16 @@ app.post("/login", (req, res) => {
         }
 
         if (result) {
+            mail = req.body.uemail;
             res.send(result);
         } else {
             res.send({ message: "Wrong username/password combination" });
         }
     });
+});
+
+app.get("/profile", (req, res) => {
+    res.send({ title : mail });
 });
 
 app.listen(3001, () => {
