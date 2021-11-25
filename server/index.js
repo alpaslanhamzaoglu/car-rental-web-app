@@ -35,7 +35,7 @@ app.post("/register", (req, res) => {
 app.post("/login", (req, res) => {
     const uemail = req.body.uemail;
     const password = req.body.password;
-    const sqlInsert = "SELECT * FROM users WHERE uname = ? AND password = ?";
+    const sqlInsert = "SELECT * FROM users WHERE uemail = ? AND password = ?";
 
     db.query(sqlInsert, [uemail, password], (err, result) => {
         if (err) {
@@ -52,7 +52,16 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/profile", (req, res) => {
-    res.send({ title : mail });
+    const sqlInsert = "SELECT * FROM users WHERE uemail = ?"
+    db.query(sqlInsert, [mail], (err, result) => {
+        if(err) {
+            console.log(err);
+        }
+
+        if(result) {
+            res.send(result);
+        }
+    });
 });
 
 app.listen(3001, () => {
