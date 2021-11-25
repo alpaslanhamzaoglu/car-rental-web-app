@@ -15,7 +15,7 @@ function Register() {
 
     const submitMail = () => {
       //alttaki conditiona tekrar bak ilerde
-      if(pass_repeat == password)
+      if(pass_repeat === password)
           Axios.post("http://localhost:3001/register", { uemail: uemail, password: password, pass_repeat: pass_repeat }).then(() => { alert("successful"); });
     };
 
