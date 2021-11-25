@@ -9,8 +9,7 @@ function Profile() {
     let request = async () => {
         const response = await fetch('http://localhost:3001/profile');
         const data = await response.json();
-        dataName(data.title);
-        console.log(btnText);
+        dataName(data[0].uemail);
     }
     
     useEffect(() => {
