@@ -13,6 +13,7 @@ const db = mysql.createPool({
 });
 
 let mail = "";
+let pass = ""
 
 app.use(cors());
 app.use(express.json());

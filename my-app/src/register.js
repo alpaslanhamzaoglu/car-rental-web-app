@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './register.css';
 import Axios from 'axios'
-import { Form, Button, Row, Container, Col } from 'react-bootstrap';
+import { Form, Button, Row, Container, Col, FloatingLabel } from 'react-bootstrap';
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 
@@ -10,12 +10,12 @@ document.body.style.background = "#9caeff"
 
 function Register() {
 
+    const [uname, setName] = useState("");
     const [uemail, setMail] = useState("");
     const [password, setPassword] = useState("");
     const [pass_repeat, setPassRepeat] = useState("");
 
     const submitMail = () => {
-        //alttaki conditiona tekrar bak ilerde
         if (pass_repeat === password)
             Axios.post("http://localhost:3001/register", { uemail: uemail, password: password, pass_repeat: pass_repeat }).then(() => { alert("successful"); });
     };
@@ -38,7 +38,14 @@ function Register() {
                     <Form>
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
-                                <Form.Group className="emailform" controlId="formBasicEmail">
+                                <Form.Group className="nameform" controlId="formBasicName">
+                                    <Form.Control type="name" placeholder="Name" onChange={(e) => { setName(e.target.value) }} />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="justify-content-md-center">
+                            <Col xs lg="3">
+                                <Form.Group className="emailform2" controlId="formBasicEmail">
                                     <Form.Control type="email" placeholder="Email" onChange={(e) => { setMail(e.target.value) }} />
                                 </Form.Group>
                             </Col>
@@ -55,6 +62,31 @@ function Register() {
                                 <Form.Group className="passwordrepeat" controlId="formBasicPassword">
                                     <Form.Control type="password" placeholder="Repeat Password" onChange={(e) => { setPassRepeat(e.target.value) }} />
                                 </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="justify-content-md-center">
+                            <Col xs lg="3">
+                                <Form.Group className="infos" controlId="formBasicInfo">
+                                    <Form.Control
+                                        as="textarea"
+                                        placeholder="Type your information which we'll be known for the other users"
+                                        id="exampleFormControlTextarea1"
+                                        style={{ height: '100px' }}
+                                    />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="justify-content-md-center">
+                            <Col xs lg="3">
+                                <FloatingLabel controlId="floatingSelect" label="Works with selects" id="vacform">
+                                    <Form.Select aria-label="Floating label select example">
+                                        <option>Covid Vaccination Status</option>
+                                        <option value="1">None</option>
+                                        <option value="2">One Doses</option>
+                                        <option value="3">Two Doses</option>
+                                        <option value="4">Two Doses + Boosted</option>
+                                    </Form.Select>
+                                </FloatingLabel>
                             </Col>
                         </Row>
                         <Row className="justify-content-md-center">
