@@ -7,8 +7,12 @@ import Axios from 'axios'
 import './profile.css';
 
 function Profile() {
-    const [btnText, dataName] = useState("");
-    const [pass, dataName0] = useState("");
+    const [name, dataName] = useState("");
+    const [pass, dataPass] = useState("");
+    const [mail, dataMail] = useState("");
+    const [vac, dataVac] = useState("");
+    const [info, dataInfo] = useState("");
+
     const [uname, setName] = useState("");
     const [uemail, setMail] = useState("");
     const [password, setPassword] = useState("");
@@ -17,8 +21,15 @@ function Profile() {
     let request = async () => {
         const response = await fetch('http://localhost:3001/profile');
         const data = await response.json();
-        dataName(data[0].uemail);
-        dataName0(data[0].password);
+        dataName(data[0].uname);
+        dataPass(data[0].password);
+        dataMail(data[0].uemail);
+        dataVac(data[0].covidvac);
+        if (vac == 1) {
+            dataVac("Vac");
+            console.log("nope")
+        }
+        dataInfo(data[0].infos);
     }
 
     useEffect(() => {
@@ -42,13 +53,29 @@ function Profile() {
                     <div class="col align-self-center" className="p2">Car Pooling System</div>
                 </div>
             </div>
+            <div>
+                <Container id="infos">
+                    <Row className="justify-content-md-center">
+                        <Col xs lg="3">Your name is {name}.</Col>
+                    </Row>
+                    <Row className="justify-content-md-center">
+                        <Col xs lg="3">Your email is {mail}.</Col>
+                    </Row>
+                    <Row className="justify-content-md-center">
+                        <Col xs lg="3">Your info is {info}.</Col>
+                    </Row>
+                    <Row className="justify-content-md-center">
+                        <Col xs lg="3">Your covid vaction id is {vac}.</Col>
+                    </Row>
+                </Container>
+            </div>
 
             <div>
                 <Container>
                     <Form>
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
-                                <Form.Group className="nameform" controlId="formBasicName">
+                                <Form.Group className="nameformprofile" controlId="formBasicName">
                                     <Form.Control type="name" placeholder="Name" onChange={(e) => { setName(e.target.value) }} />
                                 </Form.Group>
                             </Col>
