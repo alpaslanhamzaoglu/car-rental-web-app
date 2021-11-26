@@ -11,7 +11,7 @@ function Profile() {
         const response = await fetch('http://localhost:3001/profile');
         const data = await response.json();
         dataName(data[0].uemail);
-        dataName0(data[0].password);
+        dataName0(data[0].password);        
     }
 
     useEffect(() => {

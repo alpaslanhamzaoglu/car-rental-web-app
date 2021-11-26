@@ -8,11 +8,7 @@ import { useState, useEffect } from 'react';
 
 
 function App() {
-    let request = () => {
-        window.location.href = "/home";
-    };
-
-
+    
     return (
         <Router>
             <Routes>
