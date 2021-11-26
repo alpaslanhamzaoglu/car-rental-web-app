@@ -1,11 +1,18 @@
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Container, Col } from 'react-bootstrap';
+import { Form, Button, Row, Container, Col, FloatingLabel } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
+import Axios from 'axios'
+import './profile.css';
 
 function Profile() {
     const [btnText, dataName] = useState("");
     const [pass, dataName0] = useState("");
+    const [uname, setName] = useState("");
+    const [uemail, setMail] = useState("");
+    const [password, setPassword] = useState("");
+    const [pass_repeat, setPassRepeat] = useState("");
 
     let request = async () => {
         const response = await fetch('http://localhost:3001/profile');
@@ -18,8 +25,14 @@ function Profile() {
         request();
     }, [])
 
+    const submitMail = () => {
+        if (pass_repeat === password)
+            Axios.post("http://localhost:3001/register", { uemail: uemail, password: password, pass_repeat: pass_repeat }).then(() => { alert("successful"); });
+    };
+
     return (
         <div className="Profile">
+
             <div class="container">
                 <div class="row">
                     <div class="col align-self-center" className="gee"><svg xmlns="http://www.w3.org/2000/svg" width="4%" height="auto" fill="rgb(144, 0, 0)" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
@@ -29,39 +42,68 @@ function Profile() {
                     <div class="col align-self-center" className="p2">Car Pooling System</div>
                 </div>
             </div>
+
             <div>
-                {/* <div>Hello, {btnText}</div> */}
-                {/* <div className="midiv">
-                    <img src="/van.jpg" alt="" className="profilephoto"/>
-                </div> */}
                 <Container>
                     <Form>
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
-                                <Form.Group className="emailform" controlId="formBasicEmail">
-                                    <Form.Control type="email" placeholder="Email" />
+                                <Form.Group className="nameform" controlId="formBasicName">
+                                    <Form.Control type="name" placeholder="Name" onChange={(e) => { setName(e.target.value) }} />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="justify-content-md-center">
+                            <Col xs lg="3">
+                                <Form.Group className="emailform2" controlId="formBasicEmail">
+                                    <Form.Control type="email" placeholder="Email" onChange={(e) => { setMail(e.target.value) }} />
                                 </Form.Group>
                             </Col>
                         </Row>
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
                                 <Form.Group className="passwordform" controlId="formBasicPassword">
-                                    <Form.Control type="password" placeholder="Password" />
+                                    <Form.Control type="password" placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} />
                                 </Form.Group>
                             </Col>
                         </Row>
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
                                 <Form.Group className="passwordrepeat" controlId="formBasicPassword">
-                                    <Form.Control type="password" placeholder="Repeat Password" />
+                                    <Form.Control type="password" placeholder="Repeat Password" onChange={(e) => { setPassRepeat(e.target.value) }} />
                                 </Form.Group>
                             </Col>
                         </Row>
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
+                                <Form.Group className="infos" controlId="formBasicInfo">
+                                    <Form.Control
+                                        as="textarea"
+                                        placeholder="Type your information which we'll be known for the other users"
+                                        id="exampleFormControlTextarea1"
+                                        style={{ height: '100px' }}
+                                    />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="justify-content-md-center">
+                            <Col xs lg="3">
+                                <FloatingLabel controlId="floatingSelect" label="Works with selects" id="vacform">
+                                    <Form.Select aria-label="Floating label select example">
+                                        <option>Covid Vaccination Status</option>
+                                        <option value="1">None</option>
+                                        <option value="2">One Doses</option>
+                                        <option value="3">Two Doses</option>
+                                        <option value="4">Two Doses + Boosted</option>
+                                    </Form.Select>
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
+                        <Row className="justify-content-md-center">
+                            <Col xs lg="3">
                                 <Form.Group className="registerButton">
-                                    <Button variant="primary" type="submit" className="registerButton">
-                                        Register
+                                    <Button variant="primary" type="submit" className="registerButton" onClick={submitMail}>
+                                        Change
                                     </Button>
                                 </Form.Group>
                             </Col>
