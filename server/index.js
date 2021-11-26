@@ -13,6 +13,7 @@ const db = mysql.createPool({
 });
 
 let mail = "";
+let pass = ""
 
 app.use(cors());
 app.use(express.json());
@@ -43,6 +44,7 @@ app.post("/login", (req, res) => {
         }
 
         if (result) {
+            pass = req.body.password;
             mail = req.body.uemail;
             res.send(result);
         } else {

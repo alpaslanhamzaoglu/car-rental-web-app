@@ -5,11 +5,13 @@ import { useState, useEffect } from 'react';
 
 function Profile() {
     const [btnText, dataName] = useState("");
+    const [pass, dataName0] = useState("");
 
     let request = async () => {
         const response = await fetch('http://localhost:3001/profile');
         const data = await response.json();
         dataName(data[0].uemail);
+        dataName0(data[0].password);
     }
 
     useEffect(() => {
@@ -25,10 +27,48 @@ function Profile() {
                     </div>
                     <Link to="/home" style={{ textDecoration: 'none' }}><div class="col align-self-center" className="p1">AGA</div></Link>
                     <div class="col align-self-center" className="p2">Car Pooling System</div>
-                    <div>Hello, {btnText}</div>
                 </div>
             </div>
-
+            <div>
+                {/* <div>Hello, {btnText}</div> */}
+                {/* <div className="midiv">
+                    <img src="/van.jpg" alt="" className="profilephoto"/>
+                </div> */}
+                <Container>
+                    <Form>
+                        <Row className="justify-content-md-center">
+                            <Col xs lg="3">
+                                <Form.Group className="emailform" controlId="formBasicEmail">
+                                    <Form.Control type="email" placeholder="Email" />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="justify-content-md-center">
+                            <Col xs lg="3">
+                                <Form.Group className="passwordform" controlId="formBasicPassword">
+                                    <Form.Control type="password" placeholder="Password" />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="justify-content-md-center">
+                            <Col xs lg="3">
+                                <Form.Group className="passwordrepeat" controlId="formBasicPassword">
+                                    <Form.Control type="password" placeholder="Repeat Password" />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="justify-content-md-center">
+                            <Col xs lg="3">
+                                <Form.Group className="registerButton">
+                                    <Button variant="primary" type="submit" className="registerButton">
+                                        Register
+                                    </Button>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                    </Form>
+                </Container>
+            </div>
 
         </div>
 
