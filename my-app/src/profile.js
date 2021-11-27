@@ -8,7 +8,7 @@ import './profile.css';
 
 function Profile() {
     const [name, dataName] = useState("");
-    const [pass, dataPass] = useState("");
+    //const [pass, dataPass] = useState("");
     const [mail, dataMail] = useState("");
     const [vac, dataVac] = useState("");
     const [info, dataInfo] = useState("");
@@ -22,7 +22,7 @@ function Profile() {
         const response = await fetch('http://localhost:3001/profile');
         const data = await response.json();
         dataName(data[0].uname);
-        dataPass(data[0].password);
+        //dataPass(data[0].password);
         dataMail(data[0].uemail);
         dataVac(data[0].covidvac);
         dataInfo(data[0].infos);
@@ -52,13 +52,13 @@ function Profile() {
             <div>
                 <Container id="infos">
                     <Row className="justify-content-md-center">
-                        <Col xs lg="3">Your name is {name}.</Col>
+                        <Col xs lg="12">Your name is {name}.</Col>
                     </Row>
                     <Row className="justify-content-md-center">
-                        <Col xs lg="3">Your email is {mail}.</Col>
+                        <Col xs lg="12">Your email is {mail}.</Col>
                     </Row>
                     <Row className="justify-content-md-center">
-                        <Col xs lg="3">Your info is {info}.</Col>
+                        <Col xs lg="12">Your info is {info}.</Col>
                     </Row>
                     <Row className="justify-content-md-center">
                         <Col xs lg="3">Number of covid vaccination you had is {vac - 1}.</Col>
