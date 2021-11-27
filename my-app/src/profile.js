@@ -25,10 +25,6 @@ function Profile() {
         dataPass(data[0].password);
         dataMail(data[0].uemail);
         dataVac(data[0].covidvac);
-        if (vac == 1) {
-            dataVac("Vac");
-            console.log("nope")
-        }
         dataInfo(data[0].infos);
     }
 
@@ -65,7 +61,7 @@ function Profile() {
                         <Col xs lg="3">Your info is {info}.</Col>
                     </Row>
                     <Row className="justify-content-md-center">
-                        <Col xs lg="3">Your covid vaction id is {vac}.</Col>
+                        <Col xs lg="3">Number of covid vaccination you had is {vac - 1}.</Col>
                     </Row>
                 </Container>
             </div>
