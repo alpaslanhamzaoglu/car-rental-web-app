@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './advertcreation.css';
 import Axios from 'axios'
-import { Form, Button, Row, Container, Col } from 'react-bootstrap';
+import { Form, Button, Row, Container, Col, InputGroup, FormControl, FormGroup } from 'react-bootstrap';
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 
@@ -37,49 +37,49 @@ function AdvertCreation() {
                     <Form>
                         <Row className="mb-3" id="firstrow">
                             <Form.Group as={Col} controlId="formGridEmail">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" />
+                                <Form.Label>Departure</Form.Label>
+                                <Form.Control type="text" placeholder="Enter where you are going from" />
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="formGridPassword">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" />
+                                <Form.Label>Destination</Form.Label>
+                                <Form.Control type="text" placeholder="Enter where you are going to" />
                             </Form.Group>
                         </Row>
-
-                        <Form.Group className="mb-3" controlId="formGridAddress1">
-                            <Form.Label>Address</Form.Label>
-                            <Form.Control placeholder="1234 Main St" />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="formGridAddress2">
-                            <Form.Label>Address 2</Form.Label>
-                            <Form.Control placeholder="Apartment, studio, or floor" />
-                        </Form.Group>
 
                         <Row className="mb-3">
-                            <Form.Group as={Col} controlId="formGridCity">
-                                <Form.Label>City</Form.Label>
-                                <Form.Control />
-                            </Form.Group>
-
-                            <Form.Group as={Col} controlId="formGridState">
-                                <Form.Label>State</Form.Label>
-                                <Form.Select defaultValue="Choose...">
-                                    <option>Choose...</option>
-                                    <option>...</option>
-                                </Form.Select>
-                            </Form.Group>
-
                             <Form.Group as={Col} controlId="formGridZip">
-                                <Form.Label>Zip</Form.Label>
-                                <Form.Control />
+                                <div class="md-form mx-5 my-5">
+                                    <input type="time" id="inputMDEx1" class="form-control"></input>
+                                    <label for="inputMDEx1">Choose your departure time</label>
+                                </div>
+                            </Form.Group>
+                            <Form.Group as={Col} controlId="formGridZip">
+                                <div class="md-form mx-5 my-5">
+                                    <input type="time" id="inputMDEx1" class="form-control"></input>
+                                    <label for="inputMDEx1">Choose your arrival time</label>
+                                </div>
+                            </Form.Group>
+                            <Form.Group as={Col} controlId="formGridZip">
+                                <div class="md-form mx-5 my-5">
+                                    <input type="date" id="inputMDEx1" class="form-control"></input>
+                                    <label for="inputMDEx1">Choose your travel date</label>
+                                </div>
                             </Form.Group>
                         </Row>
 
-                        <Form.Group className="mb-3" id="formGridCheckbox">
-                            <Form.Check type="checkbox" label="Check me out" />
-                        </Form.Group>
+                        <Row className="mb-3">
+                            <InputGroup as={Col} controlId="formGridMoney" id="money">
+                                <InputGroup.Text>$</InputGroup.Text>
+                                <FormControl placeholder="Desired amount of money" aria-label="Amount (to the nearest dollar)" />
+                                <InputGroup.Text>.00</InputGroup.Text>
+                            </InputGroup>
+
+                            <Form.Group as={Col} controlId="formGridCar">
+                                <Form.Label></Form.Label>
+                                <Form.Control placeholder="Car Model" />
+                            </Form.Group>
+                        </Row>
 
                         <Button variant="primary" type="submit">
                             Create

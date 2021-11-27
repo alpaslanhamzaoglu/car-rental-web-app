@@ -19,6 +19,9 @@ function Home() {
             <div>
                 <Link to="/profile">Profile</Link>
             </div>
+            <div>
+                <Link to="/advertcreation">Advert Creation</Link>
+            </div>
         </div>
 
     );
