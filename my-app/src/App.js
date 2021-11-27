@@ -8,9 +8,7 @@ import ForgotPassword from "./forgotpassword"
 
 import AdvertCreation from "./advertcreation"
 
-
 function App() {
-
     return (
         <Router>
             <Routes>
