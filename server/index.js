@@ -13,6 +13,10 @@ const db = mysql.createPool({
 });
 
 let mail = "";
+let pass = "";
+let name = "";
+let info = "";
+let vac = "";
 
 app.use(cors());
 app.use(express.json());
@@ -39,10 +43,11 @@ app.post("/login", (req, res) => {
 
     db.query(sqlInsert, [uemail, password], (err, result) => {
         if (err) {
+            console.log("error");
             res.send({ err: err });
         }
 
-        if (result) {
+        if (result.length > 0) {
             mail = req.body.uemail;
             res.send(result);
         } else {
