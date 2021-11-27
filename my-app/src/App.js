@@ -4,6 +4,7 @@ import Login from "./login";
 import Profile from "./profile";
 import Register from "./register";
 import Home from "./home";
+import ForgotPassword from "./forgotpassword"
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
                 <Route exact path="/profile" element={<Profile />} />
                 <Route exact path="/register" element={<Register />} />
                 <Route exact path="/home" element={<Home />} />
+                <Route exact path="/forgotpassword" element={<ForgotPassword />} />
             </Routes>
         </Router>
     )
