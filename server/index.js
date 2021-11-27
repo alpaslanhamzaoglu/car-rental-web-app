@@ -30,10 +30,19 @@ app.use(session({
 app.post("/register", (req, res) => {
     const uemail = req.body.uemail;
     const password = req.body.password;
-    const sqlInsert = "INSERT INTO users (uemail, password) VALUES (?, ?)";
-    db.query(sqlInsert, [uemail, password], (err, result) => {
-        console.log(result);
-    });
+    const uname = req.body.uname;
+    const covidvac = req.body.covidvac;
+    const infos = req.body.infos;
+
+    if(uemail != "" && password != "" && uname != "" && covidvac != "" && infos != "") {
+        const sqlInsert = "INSERT INTO users (uemail, password, uname, covidvac, infos) VALUES (?, ?, ?, ?, ?)";
+        db.query(sqlInsert, [uemail, password, uname, covidvac, infos], (err, result) => {
+            res.send({ message: "Successful"});
+        });
+    }
+    else {
+        res.send({ message: "Incomplete information" });
+    }
 });
 
 app.post("/login", (req, res) => {

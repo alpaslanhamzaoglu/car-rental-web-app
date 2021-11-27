@@ -16,7 +16,9 @@ function ForgotPassword() {
     const submitMail = () => {
         //alttaki conditiona tekrar bak ilerde
         if (pass_repeat === password)
+
             Axios.post("http://localhost:3001/ForgotPassword", { password: password, pass_repeat: pass_repeat }).then(() => { alert("successful"); });
+
     };
 
     return (
@@ -37,7 +39,9 @@ function ForgotPassword() {
                     <Form>
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
+
                                 <Form.Group className="passwordformforgot" controlId="formBasicPassword">
+
                                     <Form.Control type="password" placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} />
                                 </Form.Group>
                             </Col>
@@ -53,7 +57,9 @@ function ForgotPassword() {
                             <Col xs lg="3">
                                 <Form.Group className="registerButton">
                                     <Button variant="primary" type="submit" className="registerButton" onClick={submitMail}>
+
                                         Change
+
                                     </Button>
                                 </Form.Group>
                             </Col>
@@ -65,4 +71,6 @@ function ForgotPassword() {
     );
 }
 
+
 export default ForgotPassword;
+
