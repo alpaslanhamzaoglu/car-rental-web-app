@@ -1,14 +1,14 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Container, Col, FloatingLabel, Table } from 'react-bootstrap';
+import { Form, Button, Row, Container, Col, FloatingLabel } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Axios from 'axios'
 import './profile.css';
 
 function Profile() {
     const [name, dataName] = useState("");
-    const [pass, dataPass] = useState("");
+    //const [pass, dataPass] = useState("");
     const [mail, dataMail] = useState("");
     const [vac, dataVac] = useState("");
     const [info, dataInfo] = useState("");
@@ -22,7 +22,7 @@ function Profile() {
         const response = await fetch('http://localhost:3001/profile');
         const data = await response.json();
         dataName(data[0].uname);
-        dataPass(data[0].password);
+        //dataPass(data[0].password);
         dataMail(data[0].uemail);
         dataVac(data[0].covidvac);
         if (vac == 2) {
