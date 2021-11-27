@@ -17,6 +17,8 @@ function Profile() {
     const [uemail, setMail] = useState("");
     const [password, setPassword] = useState("");
     const [pass_repeat, setPassRepeat] = useState("");
+    const [covidvac, setCovidVac] = useState("");
+    const [infos, setInfos] = useState("");
 
     let request = async () => {
         const response = await fetch('http://localhost:3001/profile');
@@ -33,8 +35,10 @@ function Profile() {
     }, [])
 
     const submitMail = () => {
-        if (pass_repeat === password)
-            Axios.post("http://localhost:3001/register", { uemail: uemail, password: password, pass_repeat: pass_repeat }).then(() => { alert("successful"); });
+        Axios.post("http://localhost:3001/changeProfile", { uemail: uemail, password: password, pass_repeat: pass_repeat, 
+        uname: uname, covidvac: covidvac, infos: infos}).then(function(response) {
+            console.log(response);
+        });
     };
 
     return (
@@ -99,7 +103,7 @@ function Profile() {
                         </Row>
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
-                                <Form.Group className="infos" controlId="formBasicInfo">
+                                <Form.Group className="infos" controlId="formBasicInfo" onChange={(e) => { setInfos(e.target.value)}}>
                                     <Form.Control
                                         as="textarea"
                                         placeholder="Type your information which we'll be known for the other users"
@@ -111,7 +115,7 @@ function Profile() {
                         </Row>
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
-                                <FloatingLabel controlId="floatingSelect" label="Works with selects" id="vacform">
+                                <FloatingLabel controlId="floatingSelect" label="Works with selects" id="vacform" onChange={(e) => { setCovidVac(e.target.value)}}>
                                     <Form.Select aria-label="Floating label select example">
                                         <option>Covid Vaccination Status</option>
                                         <option value="1">None</option>

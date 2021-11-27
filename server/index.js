@@ -78,6 +78,86 @@ app.get("/profile", (req, res) => {
     });
 });
 
+app.post("/changeProfile", (req, res) => {
+    const uemail = req.body.uemail;
+    const password = req.body.password;
+    const pass_repeat = req.body.pass_repeat;
+    const uname = req.body.uname;
+    const covidvac = req.body.covidvac;
+    const infos = req.body.infos;
+
+    if(uemail != "") {
+        const sqlInsert = "UPDATE users SET uemail = ? WHERE uemail = ?";
+        db.query(sqlInsert, [uemail, mail], (err, result) => {
+            if(err) {
+                console.log(err);
+            }
+        });
+        mail = uemail;
+    }
+    if(password != "" && pass_repeat != "") {
+        const sqlInsert = "UPDATE users SET password = ? WHERE uemail = ?";
+        db.query(sqlInsert, [password, mail], (err, result) => {
+            if(err) {
+                console.log(err);
+            }
+        });
+    }
+    if(uname != "") {
+        const sqlInsert = "UPDATE users SET uname = ? WHERE uemail = ?";
+        db.query(sqlInsert, [uname, mail], (err, result) => {
+            if(err) {
+                console.log(err);
+            }
+        });
+    }
+    if(covidvac != "") {
+        const sqlInsert = "UPDATE users SET covidvac = ? WHERE uemail = ?";
+        db.query(sqlInsert, [covidvac, mail], (err, result) => {
+            if(err) {
+                console.log(err);
+            }
+        });
+    }
+    if(infos != "") {
+        const sqlInsert = "UPDATE users SET infos = ? WHERE uemail = ?";
+        db.query(sqlInsert, [infos, mail], (err, result) => {
+            if(err) {
+                console.log(err);
+            }
+        });
+    }
+});
+
+app.post("/ForgotPassword", (req, res) => {
+    const uemail = req.body.uemail;
+    const password = req.body.password;
+    const pass_repeat = req.body.pass_repeat;
+
+    if(uemail != "" && password != "" && pass_repeat != "") {
+        if(pass_repeat == password) {
+            const sqlInsert = "UPDATE users SET password = ? WHERE uemail = ?";
+            db.query(sqlInsert, [password, uemail], (err, result) => {
+                if(err) {
+                    console.log(err);
+                }
+                if(result) {
+                    if(result.changedRows == 0) {
+                        res.send({ message: "Mail is not found in database" });
+                    } else {
+                        res.send({ message: "Successful"});
+                    }
+                }
+            });
+        } else {
+            res.send({ message: "Passwords are not same" })
+        }
+    }
+    else {
+        res.send({ message: "Incomplete information" });
+    }
+});
+
 app.listen(3001, () => {
     console.log("running on port 3001");
 });
