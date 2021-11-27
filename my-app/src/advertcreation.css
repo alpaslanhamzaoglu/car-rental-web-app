@@ -3,16 +3,16 @@
     color: rgb(144, 0, 0);
     font-weight: bold;
     font-size: 400%;
-    cursor: pointer;
+    cursor: default;
   }
-  
+
   .p2 {
     text-align: center;
     color: rgb(144, 0, 0);
     font-weight: bold;
     font-size: 200%;
   }
-  
+
   .gee {
     text-align: center;
     padding-top: 1%;
@@ -20,21 +20,18 @@
     padding-bottom: 1.5%;
     transform: rotate(30deg);
   }
-  
+
+  .loginbutton {
+    margin-left: 16%;
+    margin-top: 2%;
+  }
+
   .forgotpassword {
     margin-left: 58%;
   }
-  
-  .nameform {
-    margin-top: 40%;
-    margin-bottom: 2%;
-  }
 
-  .emailform2 {
-    margin-bottom: 2%;
-  }
-  
-  .passwordform {
+  .passwordformforgot {
+    margin-top: 40%;
     margin-bottom: 2%;
   }
 
@@ -45,16 +42,8 @@
   .registerButton {
     margin-bottom: 2%;
     margin-left: 48%;
-  }
+  } 
 
-  #exampleFormControlTextarea1 {
-    margin-bottom: 2%;
-  }
-
-  #vacform {
-    margin-bottom: 2%;
-  }
-
-  #fail {
-    text-align: center;
+  #firstrow {
+      margin-top: 10%;
   }

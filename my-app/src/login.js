@@ -16,19 +16,19 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const submitMail = () => {
-    Axios.post("http://localhost:3001/login", { uemail: uemail, password: password }).then(function(response) {
-      if(response.data.message == "Wrong username/password combination") {
+    Axios.post("http://localhost:3001/login", { uemail: uemail, password: password }).then(function (response) {
+      if (response.data.message === "Wrong username/password combination") {
         alert(response.data.message);
       } else {
         window.location.href = "/home";
       }
     })
-    .catch(function(error) {
-      console.log(error);
-    });
+      .catch(function (error) {
+        console.log(error);
+      });
 
     //.then(() => { alert("successful"); }); // some comment
-    
+
   };
 
   return (
