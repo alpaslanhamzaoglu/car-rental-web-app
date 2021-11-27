@@ -47,3 +47,9 @@
   #firstrow {
       margin-top: 10%;
   }
+
+  #money {
+      align-items: flex-end;
+      height: 0ch;
+      padding-top: 1.8%;
+  }
