@@ -14,10 +14,17 @@ function ForgotPassword() {
     const [password, setPassword] = useState("");
     const [pass_repeat, setPassRepeat] = useState("");
 
+    const [failText, setText] = useState("");
+
     const submitMail = () => {
         //alttaki conditiona tekrar bak ilerde
-        if (pass_repeat === password)
-            Axios.post("http://localhost:3001/ForgotPassword", { uemail: uemail, password: password, pass_repeat: pass_repeat }).then(() => { alert("successful"); });
+        Axios.post("http://localhost:3001/ForgotPassword", { uemail : uemail, password: password, pass_repeat: pass_repeat }).then(function (response) {
+            if(response.data.message == "Successful") {
+                window.location.href = "/login";
+            } else {
+                setText(response.data.message);
+            }
+        })
     };
 
     return (
@@ -34,7 +41,9 @@ function ForgotPassword() {
             </div>
 
             <div>
+                <div id = "fail">{failText}</div>
                 <Container>
+
                     <Form>
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
@@ -45,7 +54,8 @@ function ForgotPassword() {
                         </Row>
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
-                                <Form.Group className="passwordform" controlId="formBasicPassword">
+                                <Form.Group className="passwordformforgot" controlId="formBasicPassword">
+
                                     <Form.Control type="password" placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} />
                                 </Form.Group>
                             </Col>
@@ -60,8 +70,10 @@ function ForgotPassword() {
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
                                 <Form.Group className="registerButton">
-                                    <Button variant="primary" type="submit" className="registerButton" onClick={submitMail}>
-                                        Register
+                                    <Button variant="primary"  className="registerButton" onClick={submitMail}>
+
+                                        Change
+
                                     </Button>
                                 </Form.Group>
                             </Col>
@@ -73,4 +85,6 @@ function ForgotPassword() {
     );
 }
 
+
 export default ForgotPassword;
+
