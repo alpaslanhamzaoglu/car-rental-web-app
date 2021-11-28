@@ -158,6 +158,44 @@ app.post("/ForgotPassword", (req, res) => {
     }
 });
 
+app.post("/advertCreation", (req, res) => {
+    const destination = req.body.destination;
+    const departureTime = req.body.departureTime;
+    const arrivalTime = req.body.arrivalTime;
+    const departure = req.body.departure;
+    const carmodel = req.body.carmodel;
+    const price = req.body.price;
+    const adate = req.body.adate;
+
+    const sqlSelect = "SELECT users.uid FROM users WHERE uemail = ?";
+    db.query(sqlSelect, [mail], (err, result) => { 
+        let uid;
+        uid = result[0].uid;
+
+        if(destination != "" && departureTime != "" && arrivalTime != "" && departure != "" && carmodel != "" && price != "" && adate != "") {
+            const sqlInsert = "INSERT INTO advert (destination, deptime, departure, carmodel, price, adate, arrtime) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            db.query(sqlInsert, [destination, departureTime, departure, carmodel, price, adate, arrivalTime], (err, result) => { 
+                console.log(result, err);
+                res.send({ message: "Successful" });
+            });
+        } else {
+            res.send({ message: "Incomplete Information" });
+        }
+    });
+});
+
+app.get("/listing", (req, res) => {
+    const sqlInsert = "SELECT * FROM advert";
+    db.query(sqlInsert, [], (err, result) => {
+        if(err) {
+            console.log(err);
+        }
+        if(result) {
+            res.send(result);
+        }
+    });
+});
+
 app.listen(3001, () => {
     console.log("running on port 3001");
 });

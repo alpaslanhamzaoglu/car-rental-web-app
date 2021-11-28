@@ -4,9 +4,9 @@ import Login from "./login";
 import Profile from "./profile";
 import Register from "./register";
 import Home from "./home";
-import ForgotPassword from "./forgotpassword"
-import AdvertCreation from "./advertcreation"
-import AdvertListing from "./advertlisting"
+import ForgotPassword from "./forgotpassword";
+import AdvertCreation from "./advertcreation";
+import AdvertListing from "./advertlisting";
 
 
 function App() {
