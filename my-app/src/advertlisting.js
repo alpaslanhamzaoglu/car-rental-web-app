@@ -38,11 +38,11 @@ function AdvertListing() {
                 </div>
             </div>
 
-            <div className="adverts">
+            <div className="Adverts" id="advertss">
                 {(adverts != null) ? adverts.map((advert, index) => <Advert key={index} advert={advert} />) : ''}
 
             </div>
-            
+
         </div>
     );
 }
