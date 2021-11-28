@@ -10,13 +10,19 @@ document.body.style.background = "#9caeff"
 
 function AdvertCreation() {
 
-    const [password, setPassword] = useState("");
-    const [pass_repeat, setPassRepeat] = useState("");
+    const [destination, setDestination] = useState("");
+    const [departureTime, setDepartureTime] = useState("");
+    const [arrivalTime, setArrivalTime] = useState("");
+    const [departure, setDeparture] = useState("");
+    const [carmodel, setCarModel] = useState("");
+    const [price, setPrice] = useState("");
+    const [adate, setDate] = useState("");
 
     const submitMail = () => {
-        //alttaki conditiona tekrar bak ilerde
-        if (pass_repeat === password)
-            Axios.post("http://localhost:3001/ForgotPassword", { password: password, pass_repeat: pass_repeat }).then(() => { alert("successful"); });
+        Axios.post("http://localhost:3001/advertCreation", { destination: destination, departureTime: departureTime,
+        arrivalTime: arrivalTime, departure: departure, carmodel: carmodel, price: price, adate: adate }).then(function(response) {
+            console.log(response);
+        });
     };
 
     return (
@@ -36,31 +42,31 @@ function AdvertCreation() {
                 <Container>
                     <Form>
                         <Row className="mb-3" id="firstrow">
-                            <Form.Group as={Col} controlId="formGridEmail">
+                            <Form.Group as={Col} controlId="formGridEmail" onChange={(e) => { setDeparture(e.target.value) }}>
                                 <Form.Label>Departure</Form.Label>
                                 <Form.Control type="text" placeholder="Enter where you are going from" />
                             </Form.Group>
 
-                            <Form.Group as={Col} controlId="formGridPassword">
+                            <Form.Group as={Col} controlId="formGridPassword" onChange={(e) => { setDestination(e.target.value) }}>
                                 <Form.Label>Destination</Form.Label>
                                 <Form.Control type="text" placeholder="Enter where you are going to" />
                             </Form.Group>
                         </Row>
 
                         <Row className="mb-3">
-                            <Form.Group as={Col} controlId="formGridZip">
+                            <Form.Group as={Col} controlId="formGridZip" onChange={(e) => { setDepartureTime(e.target.value) }}>
                                 <div class="md-form mx-5 my-5">
                                     <input type="time" id="inputMDEx1" class="form-control"></input>
                                     <label for="inputMDEx1">Choose your departure time</label>
                                 </div>
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formGridZip">
+                            <Form.Group as={Col} controlId="formGridZip" onChange={(e) => { setArrivalTime(e.target.value) }}>
                                 <div class="md-form mx-5 my-5">
                                     <input type="time" id="inputMDEx1" class="form-control"></input>
                                     <label for="inputMDEx1">Choose your arrival time</label>
                                 </div>
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formGridZip">
+                            <Form.Group as={Col} controlId="formGridZip" onChange={(e) => { setDate(e.target.value) }}>
                                 <div class="md-form mx-5 my-5">
                                     <input type="date" id="inputMDEx1" class="form-control"></input>
                                     <label for="inputMDEx1">Choose your travel date</label>
@@ -69,19 +75,19 @@ function AdvertCreation() {
                         </Row>
 
                         <Row className="mb-3">
-                            <InputGroup as={Col} controlId="formGridMoney" id="money">
+                            <InputGroup as={Col} controlId="formGridMoney" id="money" onChange={(e) => { setPrice(e.target.value) }}>
                                 <InputGroup.Text>$</InputGroup.Text>
                                 <FormControl placeholder="Desired amount of money" aria-label="Amount (to the nearest dollar)" />
                                 <InputGroup.Text>.00</InputGroup.Text>
                             </InputGroup>
 
-                            <Form.Group as={Col} controlId="formGridCar">
+                            <Form.Group as={Col} controlId="formGridCar" onChange={(e) => { setCarModel(e.target.value) }}>
                                 <Form.Label></Form.Label>
                                 <Form.Control placeholder="Car Model" />
                             </Form.Group>
                         </Row>
 
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" type="submit" onClick={submitMail}>
                             Create
                         </Button>
                     </Form>
