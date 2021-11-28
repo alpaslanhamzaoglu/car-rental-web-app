@@ -5,12 +5,11 @@ import Profile from "./profile";
 import Register from "./register";
 import Home from "./home";
 import ForgotPassword from "./forgotpassword"
-
 import AdvertCreation from "./advertcreation"
+import AdvertListing from "./advertlisting"
 
 
 function App() {
-
     return (
         <Router>
             <Routes>
@@ -20,7 +19,7 @@ function App() {
                 <Route exact path="/home" element={<Home />} />
                 <Route exact path="/forgotpassword" element={<ForgotPassword />} />
                 <Route exact path="/advertcreation" element={<AdvertCreation />} />
-
+                <Route exact path="/advertlisting" element={<AdvertListing />} />
             </Routes>
         </Router>
     );
