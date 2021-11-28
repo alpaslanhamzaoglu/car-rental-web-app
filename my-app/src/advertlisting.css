@@ -1,0 +1,55 @@
+.p1 {
+    text-align: center;
+    color: rgb(144, 0, 0);
+    font-weight: bold;
+    font-size: 400%;
+    cursor: default;
+  }
+
+  .p2 {
+    text-align: center;
+    color: rgb(144, 0, 0);
+    font-weight: bold;
+    font-size: 200%;
+  }
+
+  .gee {
+    text-align: center;
+    padding-top: 1%;
+    padding-left: 14%;
+    padding-bottom: 1.5%;
+    transform: rotate(30deg);
+  }
+
+  .loginbutton {
+    margin-left: 16%;
+    margin-top: 2%;
+  }
+
+  .forgotpassword {
+    margin-left: 58%;
+  }
+
+  .passwordformforgot {
+    margin-top: 40%;
+    margin-bottom: 2%;
+  }
+
+  .passwordrepeat {
+    margin-bottom: 2%;
+  }
+
+  .registerButton {
+    margin-bottom: 2%;
+    margin-left: 48%;
+  } 
+
+  #firstrow {
+      margin-top: 10%;
+  }
+
+  #money {
+      align-items: flex-end;
+      height: 0ch;
+      padding-top: 1.8%;
+  }
