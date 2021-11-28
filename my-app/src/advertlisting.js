@@ -4,6 +4,7 @@ import './advertlisting.css';
 import Axios from 'axios'
 import { Form, Button, Row, Container, Col, Card, InputGroup, FormControl, FormGroup } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
+
 import { Link } from "react-router-dom";
 import Advert from './advert.js';
 
@@ -39,6 +40,7 @@ function AdvertListing() {
 
             <div className="adverts">
                 {(adverts != null) ? adverts.map((advert, index) => <Advert key={index} advert={advert} />) : ''}
+
             </div>
             
         </div>
