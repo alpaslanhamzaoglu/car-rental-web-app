@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './advertlisting.css';
 import Axios from 'axios'
-import { Form, Button, Row, Container, Col, InputGroup, FormControl, FormGroup } from 'react-bootstrap';
+import { Form, Button, Row, Container, Col, InputGroup, FormControl, FormGroup, Card } from 'react-bootstrap';
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 
@@ -34,57 +34,19 @@ function AdvertListing() {
 
             <div>
                 <Container>
-                    <Form>
-                        <Row className="mb-3" id="firstrow">
-                            <Form.Group as={Col} controlId="formGridEmail">
-                                <Form.Label>Departure</Form.Label>
-                                <Form.Control type="text" placeholder="Enter where you are going from" />
-                            </Form.Group>
-
-                            <Form.Group as={Col} controlId="formGridPassword">
-                                <Form.Label>Destination</Form.Label>
-                                <Form.Control type="text" placeholder="Enter where you are going to" />
-                            </Form.Group>
-                        </Row>
-
-                        <Row className="mb-3">
-                            <Form.Group as={Col} controlId="formGridZip">
-                                <div class="md-form mx-5 my-5">
-                                    <input type="time" id="inputMDEx1" class="form-control"></input>
-                                    <label for="inputMDEx1">Choose your departure time</label>
-                                </div>
-                            </Form.Group>
-                            <Form.Group as={Col} controlId="formGridZip">
-                                <div class="md-form mx-5 my-5">
-                                    <input type="time" id="inputMDEx1" class="form-control"></input>
-                                    <label for="inputMDEx1">Choose your arrival time</label>
-                                </div>
-                            </Form.Group>
-                            <Form.Group as={Col} controlId="formGridZip">
-                                <div class="md-form mx-5 my-5">
-                                    <input type="date" id="inputMDEx1" class="form-control"></input>
-                                    <label for="inputMDEx1">Choose your travel date</label>
-                                </div>
-                            </Form.Group>
-                        </Row>
-
-                        <Row className="mb-3">
-                            <InputGroup as={Col} controlId="formGridMoney" id="money">
-                                <InputGroup.Text>$</InputGroup.Text>
-                                <FormControl placeholder="Desired amount of money" aria-label="Amount (to the nearest dollar)" />
-                                <InputGroup.Text>.00</InputGroup.Text>
-                            </InputGroup>
-
-                            <Form.Group as={Col} controlId="formGridCar">
-                                <Form.Label></Form.Label>
-                                <Form.Control placeholder="Car Model" />
-                            </Form.Group>
-                        </Row>
-
-                        <Button variant="primary" type="submit">
-                            Create
-                        </Button>
-                    </Form>
+                    <Row className="mb-3" id="firstrow">
+                        <Card className="text-center">
+                            <Card.Header>Featured</Card.Header>
+                            <Card.Body>
+                                <Card.Title>Special title treatment</Card.Title>
+                                <Card.Text>
+                                    With supporting text below as a natural lead-in to additional content.
+                                </Card.Text>
+                                <Button variant="primary">Buy</Button>
+                            </Card.Body>
+                            <Card.Footer className="text-muted">2 days ago</Card.Footer>
+                        </Card>
+                    </Row>
                 </Container>
             </div>
         </div>
