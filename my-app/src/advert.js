@@ -5,17 +5,19 @@ import './advert.css';
 function Advert(props) {
   return (
     <advert>
-      <Card className="text-center" id="card">
+      <Card className="text-center" style={{ width: '50rem' }}>
         <Card.Header>{props.advert.departure} - {props.advert.destination}</Card.Header>
         <Card.Body>
-          <Card.Title>Special title treatment</Card.Title>
+          <Card.Title>{props.advert.deptime} - {props.advert.arrtime}</Card.Title>
           <Card.Text>
-            With supporting text below as a natural lead-in to additional content.
+            {props.advert.carmodel}
           </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <Button variant="primary">Purchase</Button>
+
         </Card.Body>
         <Card.Footer className="text-muted">2 days ago</Card.Footer>
       </Card>
+      <br />
     </advert>
   )
 }
