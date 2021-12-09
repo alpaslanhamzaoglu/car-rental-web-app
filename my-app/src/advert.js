@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Button, Row, Container, Col, FloatingLabel } from 'react-bootstrap';
+import './advert.css';
 
 function Advert(props) {
   return (
@@ -12,6 +13,7 @@ function Advert(props) {
             {props.advert.carmodel}
           </Card.Text>
           <Button variant="primary">Purchase</Button>
+
         </Card.Body>
         <Card.Footer className="text-muted">2 days ago</Card.Footer>
       </Card>

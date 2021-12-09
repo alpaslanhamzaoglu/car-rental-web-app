@@ -4,6 +4,7 @@ import './advertlisting.css';
 import axios from 'axios'
 import { Form, Button, Row, Container, Col, Card, InputGroup, FormControl, FormGroup } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
+
 import { Link } from "react-router-dom";
 import Advert from './advert.js';
 
@@ -61,7 +62,6 @@ function AdvertListing() {
                     <div class="col align-self-center" className="p2">Car Pooling System</div>
                 </div>
             </div>
-
             <div>
                 <Container>
                     <Form>
@@ -116,11 +116,11 @@ function AdvertListing() {
                     </div>                    
                 )}
             </section>
-
             <div className="Adverts" id="advertss">
                 {(adverts != null) ? adverts.map((advert, index) => <Advert key={index} advert={advert} />) : ''}
+
             </div>
-            
+
         </div>
     );
 }
