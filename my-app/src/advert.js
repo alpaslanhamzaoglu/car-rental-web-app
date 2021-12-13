@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Row, Container, Col, FloatingLabel } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 import './advert.css';
 
 function Advert(props) {

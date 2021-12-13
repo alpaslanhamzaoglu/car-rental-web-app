@@ -22,7 +22,7 @@ function Register() {
     const submitMail = async () => {
         if (pass_repeat === password) {
             Axios.post("http://localhost:3001/register", { uemail: uemail, password: password, pass_repeat: pass_repeat, uname: uname, covidvac: covidvac, infos: infos}).then(function(response) {
-                if(response.data.message == "Incomplete information") {
+                if(response.data.message === "Incomplete information") {
                     setText(response.data.message);
                 } else {
                     window.location.href = "/home";
