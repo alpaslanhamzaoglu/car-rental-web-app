@@ -1,10 +1,11 @@
 import React from 'react';
-import { Card, Button, Row, Container, Col, FloatingLabel } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
+import './advert.css';
 
 function Advert(props) {
   return (
     <advert>
-      <Card className="text-center">
+      <Card className="text-center" style={{ width: '50rem' }}>
         <Card.Header>{props.advert.departure} - {props.advert.destination}</Card.Header>
         <Card.Body>
           <Card.Title>{props.advert.deptime} - {props.advert.arrtime}</Card.Title>

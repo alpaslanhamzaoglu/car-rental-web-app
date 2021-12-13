@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './advertcreation.css';
 import Axios from 'axios'
-import { Form, Button, Row, Container, Col, InputGroup, FormControl, FormGroup } from 'react-bootstrap';
+import { Form, Button, Row, Container, Col, InputGroup, FormControl } from 'react-bootstrap';
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 
@@ -19,8 +19,10 @@ function AdvertCreation() {
     const [adate, setDate] = useState("");
 
     const submitMail = () => {
-        Axios.post("http://localhost:3001/advertCreation", { destination: destination, departureTime: departureTime,
-        arrivalTime: arrivalTime, departure: departure, carmodel: carmodel, price: price, adate: adate }).then(function(response) {
+        Axios.post("http://localhost:3001/advertCreation", {
+            destination: destination, departureTime: departureTime,
+            arrivalTime: arrivalTime, departure: departure, carmodel: carmodel, price: price, adate: adate
+        }).then(function (response) {
             console.log(response);
         });
     };
