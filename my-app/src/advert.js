@@ -13,7 +13,6 @@ function Advert(props) {
             {props.advert.carmodel}
           </Card.Text>
           <Button variant="primary">Purchase</Button>
-
         </Card.Body>
         <Card.Footer className="text-muted">2 days ago</Card.Footer>
       </Card>
