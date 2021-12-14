@@ -26,9 +26,6 @@ function Login() {
       .catch(function (error) {
         console.log(error);
       });
-
-    //.then(() => { alert("successful"); }); // some comment
-
   };
 
   return (
