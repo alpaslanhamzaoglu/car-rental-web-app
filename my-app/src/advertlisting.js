@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './advertlisting.css';
-import { Form, Button, Row, Container, Col } from 'react-bootstrap';
+import { Form, Button, Row, Container, Col, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
 
@@ -21,7 +21,7 @@ function AdvertListing() {
     const [arrivalTime, setArrivalTime] = useState("");
     const [departure, setDeparture] = useState("");
     const [adate, setDate] = useState("");
-
+  
     const [searchActive, setSearch] = useState(false);
     const setActiveSearch = () => setSearch(true);
     const setDeactiveSearch = () => setSearch(false);
@@ -82,7 +82,6 @@ function AdvertListing() {
 
     return (
         <div className="AdvertListing">
-
             <div class="container">
                 <div class="row">
                     <div class="col align-self-center" className="gee"><svg xmlns="http://www.w3.org/2000/svg" width="4%" height="auto" fill="rgb(144, 0, 0)" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
@@ -106,7 +105,6 @@ function AdvertListing() {
                                 <Form.Control type="text" placeholder="Enter where you are going to" />
                             </Form.Group>
                         </Row>
-
                         <Row className="mb-3">
                             <Form.Group as={Col} controlId="formGridZip" onChange={(e) => { setDepartureTime(e.target.value) }}>
                                 <div class="md-form mx-5 my-5">

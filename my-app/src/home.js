@@ -25,6 +25,12 @@ function Home() {
             <div>
                 <Link to="/advertlisting">Advert Listing</Link>
             </div>
+            <div>
+                <Link to="/carrental">Car Rental</Link>
+            </div>
+            <div>
+                <Link to="/purchase">Purchase</Link>
+            </div>
         </div>
 
     );
