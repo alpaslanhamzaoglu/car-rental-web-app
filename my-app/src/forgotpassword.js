@@ -19,7 +19,7 @@ function ForgotPassword() {
     const submitMail = () => {
         //alttaki conditiona tekrar bak ilerde
         Axios.post("http://localhost:3001/ForgotPassword", { uemail : uemail, password: password, pass_repeat: pass_repeat }).then(function (response) {
-            if(response.data.message == "Successful") {
+            if(response.data.message === "Successful") {
                 window.location.href = "/login";
             } else {
                 setText(response.data.message);
