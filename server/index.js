@@ -196,6 +196,41 @@ app.get("/listing", (req, res) => {
     });
 });
 
+app.post("/filterSearch", (req, res) => {
+    const departure = req.body.departure;
+    const destination = req.body.destination;
+    const departureTime = req.body.departureTime;
+    const arrivalTime = req.body.arrivalTime;
+    const adate = req.body.adate;
+
+    console.log(departure);
+
+    // let sqlInsert = "SELECT * FROM advert WHERE (";
+    // if(departure != "") {
+    //     sqlInsert += "departure, ";
+    // }
+    // if(destination != "") {
+    //     sqlInsert += "destination, ";
+    // }
+    // if(depTime != "") {
+    //     sqlInsert += "deptime, ";
+    // }
+    // if(arrTime != "") {
+    //     sqlInsert += "arrTime, ";
+    // }
+    // if(date != "") {
+    //     sqlInsert += "adate, ";
+    // }
+    // sqlInsert = sqlInsert.substring(0, sqlInsert.length - 2);
+    // sqlInsert += ")";
+
+    const sqlInsert = "SELECT * FROM advert WHERE (destination, deptime, departure, adate, arrtime) VALUES (?, ?, ?, ?, ?)"; 
+    db.query(sqlInsert, [destination, departureTime, departure, adate, arrivalTime], (err, result) => {
+        res.send(result);
+    });
+
+});
+
 app.listen(3001, () => {
     console.log("running on port 3001");
 });
