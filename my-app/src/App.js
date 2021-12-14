@@ -8,6 +8,7 @@ import ForgotPassword from "./forgotpassword";
 import AdvertCreation from "./advertcreation";
 import AdvertListing from "./advertlisting";
 import CarRental from "./carrental";
+import Purchase from "./purchase";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route exact path="/advertcreation" element={<AdvertCreation />} />
                 <Route exact path="/advertlisting" element={<AdvertListing />} />
                 <Route exact path="/carrental" element={<CarRental />} />
+                <Route exact path="/purchase" element={<Purchase />} />
             </Routes>
         </Router>
     );
