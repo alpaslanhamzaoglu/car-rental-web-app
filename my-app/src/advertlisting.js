@@ -44,6 +44,7 @@ function AdvertListing() {
         destination = "";
         departure = "";
         adate = "";
+        setFilteredData(adverts);
     }
 
     const handleSearch = () => {
