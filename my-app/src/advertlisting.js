@@ -14,7 +14,7 @@ function AdvertListing() {
 
     const [adverts, setAdverts] = useState([]);
 
-    const [filteredData, setFilteredData] = useState(adverts);
+    const [filteredData, setFilteredData] = useState([]);
 
     const [destination, setDestination] = useState("");
     const [departureTime, setDepartureTime] = useState("");
@@ -74,6 +74,7 @@ function AdvertListing() {
             }
             setFilteredData(arr);
         }
+        console.log(filteredData);
     }
 
     useEffect(() => {

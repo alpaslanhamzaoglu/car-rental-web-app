@@ -5,7 +5,7 @@ import { Form, Button, Row, Container, Col, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 
 import { Link } from "react-router-dom";
-import Advert from './advert.js';
+import Car from './car.js';
 
 document.body.style.background = "#9caeff"
 
@@ -16,11 +16,10 @@ function CarRental() {
     const [searchActive, setSearch] = useState(false);
 
     let request = async () => {
-        const response = await fetch('http://localhost:3001/listing');
+        const response = await fetch('http://localhost:3001/carListing');
         const data = await response.json();
 
         setAdverts(data);
-        setFilteredData(data);
     }
 
     useEffect(() => {
@@ -40,19 +39,8 @@ function CarRental() {
                 </div>
             </div>
 
-            <section className="Filter">
-                {searchActive ? (
-                    <div className="Adverts" id="advertss">
-                        {(filteredData != null) ? filteredData.map((advert, index) => <Advert key={index} advert={advert} />) : ''}
-                    </div>
-                ) : (
-                    <div className="Adverts" id="advertss">
-                        {(adverts != null) ? adverts.map((advert, index) => <Advert key={index} advert={advert} />) : ''}
-                    </div>
-                )}
-            </section>
             <div className="Adverts" id="advertss">
-                {(adverts != null) ? adverts.map((advert, index) => <Advert key={index} advert={advert} />) : ''}
+                {(adverts != null) ? adverts.map((advert, index) => <Car key={index} advert={advert} />) : ''}
             </div>
         </div>
     );

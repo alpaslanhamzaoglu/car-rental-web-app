@@ -196,6 +196,18 @@ app.get("/listing", (req, res) => {
     });
 });
 
+app.get("/carListing", (req, res) => {
+    const sqlInsert = "SELECT * FROM rentcars";
+    db.query(sqlInsert, [], (err, result) => {
+        if(err) {
+            console.log(err);
+        }
+        if(result) {
+            res.send(result);
+        }
+    });
+});
+
 app.post("/filterSearch", (req, res) => {
     const departure = req.body.departure;
     const destination = req.body.destination;
@@ -204,25 +216,6 @@ app.post("/filterSearch", (req, res) => {
     const adate = req.body.adate;
 
     console.log(departure);
-
-    // let sqlInsert = "SELECT * FROM advert WHERE (";
-    // if(departure != "") {
-    //     sqlInsert += "departure, ";
-    // }
-    // if(destination != "") {
-    //     sqlInsert += "destination, ";
-    // }
-    // if(depTime != "") {
-    //     sqlInsert += "deptime, ";
-    // }
-    // if(arrTime != "") {
-    //     sqlInsert += "arrTime, ";
-    // }
-    // if(date != "") {
-    //     sqlInsert += "adate, ";
-    // }
-    // sqlInsert = sqlInsert.substring(0, sqlInsert.length - 2);
-    // sqlInsert += ")";
 
     const sqlInsert = "SELECT * FROM advert WHERE (destination, deptime, departure, adate, arrtime) VALUES (?, ?, ?, ?, ?)"; 
     db.query(sqlInsert, [destination, departureTime, departure, adate, arrivalTime], (err, result) => {
