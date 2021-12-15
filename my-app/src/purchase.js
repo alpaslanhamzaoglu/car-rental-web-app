@@ -54,7 +54,7 @@ function Purchase() {
             <div>
                 <Container>
                     <Form>
-                        <Row className="mb-3" id="firstrow">
+                        <Row className="mb-3" id="firstrow1">
                             <Form.Group as={Col} controlId="formGridEmail" onChange={(e) => { setDeparture(e.target.value) }}>
                                 <Form.Label>Name on Card</Form.Label>
                                 <Form.Control type="text" placeholder="" />
@@ -83,7 +83,7 @@ function Purchase() {
                             </Form.Group>
                         </Row>
 
-                        <Button variant="primary" type="submit" onClick={submitMail}>
+                        <Button id="buybutton" variant="primary" type="submit" onClick={submitMail}>
                             Buy
                         </Button>
                     </Form>
