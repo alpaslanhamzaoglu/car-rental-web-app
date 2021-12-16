@@ -41,9 +41,10 @@ function AdvertListing() {
     }
 
     const clearSearch = () => {
-        destination = "";
-        departure = "";
-        adate = "";
+        setDeparture("");
+        setDestination("");
+        setDate("");
+        setDeactiveSearch();
         setFilteredData(adverts);
     }
 
@@ -175,7 +176,7 @@ function AdvertListing() {
                         </Stack>
 
                         <Row>
-                            <Button as={Col} className="buttons1" variant="primary" onClick={clearSearch, setDeactiveSearch}>
+                            <Button as={Col} className="buttons1" variant="primary" onClick={clearSearch}>
                                 Clear Filter
                             </Button>
                             <Button as={Col} className="buttons2" variant="primary" onClick={handleSearch}>
@@ -189,7 +190,7 @@ function AdvertListing() {
             <section className="Filter">
                 {searchActive ? (
                     <div className="Adverts" id="advertss">
-                        {(filteredData != null) ? filteredData.map((advert, index) => <Advert key={index} advert={advert} />) : ''}
+                        {(filteredData != null) ? filteredData.map((advert, index) => <Advert key={index} advert={advert} onClick={clearSearch} />) : ''}
                     </div>
                 ) : (
                     <div className="Adverts" id="advertss">

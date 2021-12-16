@@ -224,6 +224,11 @@ app.post("/filterSearch", (req, res) => {
 
 });
 
+app.post("/purchase", (req, res) => {
+    const advert = req.body.advert;
+    console.log(advert);
+});
+
 app.listen(3001, () => {
     console.log("running on port 3001");
 });
