@@ -91,13 +91,61 @@ app.post("/buy", (req, res) => {
             uid = result[0].uid;
 
             const sqlInsert = "INSERT INTO pastpurchase (aID, uID, purcdate, creditCardNumber, creditCardCVV, creditCardDate, creditCardName, creditCardEmail) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            db.query(sqlInsert, [advert.aID, uid, date, card, cvv, date, name, email], (err, result) => { 
+            db.query(sqlInsert, [advert.aID, uid, currentDate, card, cvv, date, name, email], (err, result) => { 
                 console.log(result, err);
                 res.send({ message: "Successful" });
             });
         });
     };
 });
+
+app.post("/rent", (req, res) => {
+    const name = req.body.name;
+    const email = req.body.email;
+    const card = req.body.card;
+    const cvv = req.body.cvv;
+    const date = req.body.date;
+    const rentdate = req.body.rentdate;
+    const deliverdate = req.body.deliverdate;
+
+    const year = parseInt(date.substring(0, 4));
+    const month = parseInt(date.substring(5, 7));
+    const day = parseInt(date.substring(8, 10));
+
+    const rentYear = parseInt(rentdate.substring(0, 4));
+    const rentMonth = parseInt(rentdate.substring(5, 7));
+    const rentDay = parseInt(rentdate.substring(8, 10));
+
+    const deliverYear = parseInt(rentdate.substring(0, 4));
+    const deliverMonth = parseInt(rentdate.substring(5, 7));
+    const deliverDay = parseInt(rentdate.substring(8, 10));
+
+    let currentDate = new Date();
+
+    if(name == "" || email == "" || card == "" || cvv == "" || date == "") {
+        res.send({ message: "Incomplete Information" });
+    } else if(card.length != 16) {
+        res.send({ message: "Wrong Credit Card Number" });
+    } else if(cvv.length != 3) {
+        res.send({ message: "Wrong CVV" });
+    } else if(currentDate.getFullYear() > year || (currentDate.getFullYear() == year && currentDate.getMonth() + 1 > month) || (currentDate.getFullYear() == year && currentDate.getMonth() + 1 == month && currentDate.getDate() > day)) {
+        res.send({ message: "Card is expired" })
+    }
+    else {
+        const sqlSelect = "SELECT users.uid FROM users WHERE uemail = ?";
+        db.query(sqlSelect, [mail], (err, result) => { 
+            let uid;
+            uid = result[0].uid;
+
+            const sqlInsert = "INSERT INTO rentcarpurchase (cID, uID, rentpurcdate, creditCardNumber, creditCardCVV, creditCardDate, creditCardName, creditCardEmail, begindate, enddate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            db.query(sqlInsert, [advert.cID, uid, currentDate, card, cvv, date, name, email, rentdate, deliverdate], (err, result) => { 
+                console.log(result, err);
+                res.send({ message: "Successful" });
+            });
+        });
+    };
+});
+
 
 app.get("/profile", (req, res) => {
     const sqlInsert = "SELECT * FROM users WHERE uemail = ?"
