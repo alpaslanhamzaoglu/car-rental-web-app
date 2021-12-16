@@ -1,12 +1,10 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
+import './car.css';
+import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Axios from 'axios'
-import './advert.css';
 
-function Advert(props) {
-  const date = props.advert.adate;
-  const mydate = date.substring(8,10) + "-" + date.substring(5,7) + "-" + date.substring(0,4);
+function Car(props) {
 
   const navigate = useNavigate();
 
@@ -19,21 +17,18 @@ function Advert(props) {
   }
 
   return (
-    <advert>
+    <car>
       <Card className="text-center" style={{ width: '50rem' }}>
-        <Card.Header>{props.advert.departure} - {props.advert.destination}</Card.Header>
+        <Card.Header>{props.advert.rentcarmodel}</Card.Header>
         <Card.Body>
-          <Card.Title>{props.advert.deptime} - {props.advert.arrtime}</Card.Title>
-          <Card.Text>
-            {props.advert.carmodel}
-          </Card.Text>
+          <Card.Title>{props.advert.rentprice} TL</Card.Title>
           <Button variant="primary" onClick={func}>Purchase</Button>
         </Card.Body>
-        <Card.Footer className="text-muted">{mydate}</Card.Footer>
+        <Card.Footer className="text-muted">2 days ago</Card.Footer>
       </Card>
       <br />
-    </advert>
+    </car>
   )
 }
 
-export default Advert;
+export default Car;

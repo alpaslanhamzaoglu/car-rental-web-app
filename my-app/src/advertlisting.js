@@ -3,6 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './advertlisting.css';
 import { Form, Button, Row, Container, Col, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
+
+import { styled } from '@mui/material/styles';
+import Switch from '@mui/material/Switch';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import Axios from 'axios';
 
 import { Link } from "react-router-dom";
@@ -14,11 +19,12 @@ function AdvertListing() {
 
     const [adverts, setAdverts] = useState([]);
 
-    const [filteredData, setFilteredData] = useState(adverts);
+    const [filteredData, setFilteredData] = useState([]);
+
+    const [motorcycleCheck, setMotor] = useState(false);
+    const changeVeh = () => setMotor(!motorcycleCheck); //backend for switch should be implemented
 
     const [destination, setDestination] = useState("");
-    const [departureTime, setDepartureTime] = useState("");
-    const [arrivalTime, setArrivalTime] = useState("");
     const [departure, setDeparture] = useState("");
     const [adate, setDate] = useState("");
   
@@ -32,6 +38,14 @@ function AdvertListing() {
 
         setAdverts(data);
         setFilteredData(data);
+    }
+
+    const clearSearch = () => {
+        setDeparture("");
+        setDestination("");
+        setDate("");
+        setDeactiveSearch();
+        setFilteredData(adverts);
     }
 
     const handleSearch = () => {
@@ -74,11 +88,55 @@ function AdvertListing() {
             }
             setFilteredData(arr);
         }
+        console.log(filteredData);
     }
 
     useEffect(() => {
         request();
     }, [])
+
+    const AntSwitch = styled(Switch)(({ theme }) => ({
+        width: 28,
+        height: 16,
+        padding: 0,
+        justifyContent:'center',
+        display: 'flex',
+        '&:active': {
+          '& .MuiSwitch-thumb': {
+            width: 15,
+          },
+          '& .MuiSwitch-switchBase.Mui-checked': {
+            transform: 'translateX(9px)',
+          },
+        },
+        '& .MuiSwitch-switchBase': {
+          padding: 2,
+          '&.Mui-checked': {
+            transform: 'translateX(12px)',
+            color: '#fff',
+            '& + .MuiSwitch-track': {
+              opacity: 1,
+              backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : '#1890ff',
+            },
+          },
+        },
+        '& .MuiSwitch-thumb': {
+          boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
+          width: 12,
+          height: 12,
+          borderRadius: 6,
+          transition: theme.transitions.create(['width'], {
+            duration: 200,
+          }),
+        },
+        '& .MuiSwitch-track': {
+          borderRadius: 16 / 2,
+          opacity: 1,
+          backgroundColor:
+            theme.palette.mode === 'dark' ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.25)',
+          boxSizing: 'border-box',
+        },
+      }));
 
     return (
         <div className="AdvertListing">
@@ -104,31 +162,27 @@ function AdvertListing() {
                                 <Form.Label>Destination</Form.Label>
                                 <Form.Control type="text" placeholder="Enter where you are going to" />
                             </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
-                            <Form.Group as={Col} controlId="formGridZip" onChange={(e) => { setDepartureTime(e.target.value) }}>
-                                <div class="md-form mx-5 my-5">
-                                    <input type="time" id="inputMDEx1" class="form-control"></input>
-                                    <label for="inputMDEx1">Choose your departure time</label>
-                                </div>
-                            </Form.Group>
-                            <Form.Group as={Col} controlId="formGridZip" onChange={(e) => { setArrivalTime(e.target.value) }}>
-                                <div class="md-form mx-5 my-5">
-                                    <input type="time" id="inputMDEx1" class="form-control"></input>
-                                    <label for="inputMDEx1">Choose your arrival time</label>
-                                </div>
-                            </Form.Group>
+
                             <Form.Group as={Col} controlId="formGridZip" onChange={(e) => { setDate(e.target.value) }}>
-                                <div class="md-form mx-5 my-5">
-                                    <input type="date" id="inputMDEx1" class="form-control"></input>
-                                    <label for="inputMDEx1">Choose your travel date</label>
-                                </div>
+                                <Form.Label>Choose your travel date</Form.Label>
+                                <Form.Control type="date" placeholder="Enter the date of travel"/>
                             </Form.Group>
                         </Row>
 
-                        <Button variant="primary" onClick={handleSearch}>
-                            Search
-                        </Button>
+                        <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" marginBottom={2}>
+                            <Typography>Motorcycle</Typography>
+                            <AntSwitch checked={!motorcycleCheck} onChange={changeVeh} inputProps={{ 'aria-label': 'ant design' }} />
+                            <Typography>Car</Typography>
+                        </Stack>
+
+                        <Row>
+                            <Button as={Col} className="buttons1" variant="primary" onClick={clearSearch}>
+                                Clear Filter
+                            </Button>
+                            <Button as={Col} className="buttons2" variant="primary" onClick={handleSearch}>
+                                Search
+                            </Button>
+                        </Row>
                     </Form>
                 </Container>
             </div>
@@ -136,7 +190,7 @@ function AdvertListing() {
             <section className="Filter">
                 {searchActive ? (
                     <div className="Adverts" id="advertss">
-                        {(filteredData != null) ? filteredData.map((advert, index) => <Advert key={index} advert={advert} />) : ''}
+                        {(filteredData != null) ? filteredData.map((advert, index) => <Advert key={index} advert={advert} onClick={clearSearch} />) : ''}
                     </div>
                 ) : (
                     <div className="Adverts" id="advertss">
@@ -144,12 +198,6 @@ function AdvertListing() {
                     </div>                     
                 )}
             </section>
-            
-            {/* <div className="Adverts" id="advertss">
-                {(adverts != null) ? adverts.map((advert, index) => <Advert key={index} advert={advert} />) : ''}
-
-            </div> */}
-            
         </div>
     );
 }
