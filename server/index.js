@@ -13,10 +13,7 @@ const db = mysql.createPool({
 });
 
 let mail = "";
-let pass = "";
-let name = "";
-let info = "";
-let vac = "";
+let advert;
 
 app.use(cors());
 app.use(express.json());
@@ -63,6 +60,43 @@ app.post("/login", (req, res) => {
             res.send({ message: "Wrong username/password combination" });
         }
     });
+});
+
+app.post("/buy", (req, res) => {
+    const name = req.body.name;
+    const email = req.body.email;
+    const card = req.body.card;
+    const cvv = req.body.cvv;
+    const date = req.body.date;
+
+    const year = parseInt(date.substring(0, 4));
+    const month = parseInt(date.substring(5, 7));
+    const day = parseInt(date.substring(8, 10));
+
+    let currentDate = new Date();
+
+    if(name == "" || email == "" || card == "" || cvv == "" || date == "") {
+        res.send({ message: "Incomplete Information" });
+    } else if(card.length != 16) {
+        res.send({ message: "Wrong Credit Card Number" });
+    } else if(cvv.length != 3) {
+        res.send({ message: "Wrong CVV" });
+    } else if(currentDate.getFullYear() > year || (currentDate.getFullYear() == year && currentDate.getMonth() + 1 > month) || (currentDate.getFullYear() == year && currentDate.getMonth() + 1 == month && currentDate.getDate() > day)) {
+        res.send({ message: "Card is expired" })
+    }
+    else {
+        const sqlSelect = "SELECT users.uid FROM users WHERE uemail = ?";
+        db.query(sqlSelect, [mail], (err, result) => { 
+            let uid;
+            uid = result[0].uid;
+
+            const sqlInsert = "INSERT INTO pastpurchase (aID, uID, purcdate, creditCardNumber, creditCardCVV, creditCardDate, creditCardName, creditCardEmail) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            db.query(sqlInsert, [advert.aID, uid, date, card, cvv, date, name, email], (err, result) => { 
+                console.log(result, err);
+                res.send({ message: "Successful" });
+            });
+        });
+    };
 });
 
 app.get("/profile", (req, res) => {
@@ -208,6 +242,10 @@ app.get("/carListing", (req, res) => {
     });
 });
 
+app.get("/deneme", (req, res) => {
+    res.send(advert);
+});
+
 app.post("/filterSearch", (req, res) => {
     const departure = req.body.departure;
     const destination = req.body.destination;
@@ -225,8 +263,8 @@ app.post("/filterSearch", (req, res) => {
 });
 
 app.post("/purchase", (req, res) => {
-    const advert = req.body.advert;
-    console.log(advert);
+    advert = req.body.advert;
+    res.send({ message: "Success" });
 });
 
 app.listen(3001, () => {
