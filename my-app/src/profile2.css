@@ -1,0 +1,63 @@
+.p1 {
+    text-align: center;
+    color: rgb(144, 0, 0);
+    font-weight: bold;
+    font-size: 400%;
+    cursor: pointer;
+  }
+  
+  .p2 {
+    text-align: center;
+    color: rgb(144, 0, 0);
+    font-weight: bold;
+    font-size: 200%;
+  }
+  
+  .gee {
+    text-align: center;
+    padding-top: 1%;
+    padding-left: 14%;
+    padding-bottom: 1.5%;
+    transform: rotate(30deg);
+  }
+  
+  .forgotpassword {
+    margin-left: 58%;
+  }
+  
+  .nameformprofile {
+    margin-top: 20%;
+    margin-bottom: 2%;
+  }
+
+  .emailform2 {
+    margin-bottom: 2%;
+  }
+  
+  .passwordform {
+    margin-bottom: 2%;
+  }
+
+  .passwordrepeat {
+    margin-bottom: 2%;
+  }
+
+  .registerButton {
+    margin-bottom: 2%;
+    margin-left: 48%;
+  }
+
+  #exampleFormControlTextarea1 {
+    margin-bottom: 2%;
+  }
+
+  #vacform {
+    margin-bottom: 2%;
+  }
+
+  #infos {
+    color: rgb(0, 0, 0);
+    font-size: 150%;
+    margin-top: 5%;
+    text-align: center;
+  }
