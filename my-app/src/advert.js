@@ -1,8 +1,23 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import Axios from 'axios'
 import './advert.css';
 
 function Advert(props) {
+  const date = props.advert.adate;
+  const mydate = date.substring(8,10) + "-" + date.substring(5,7) + "-" + date.substring(0,4);
+
+  const navigate = useNavigate();
+
+  const func = () => {
+    Axios.post("http://localhost:3001/purchase", { advert : props.advert }).then(function (response) {
+      if(response.data.message == "Success") {
+        navigate("/purchase");
+      }
+    })
+  }
+
   return (
     <advert>
       <Card className="text-center" style={{ width: '50rem' }}>
@@ -12,9 +27,9 @@ function Advert(props) {
           <Card.Text>
             {props.advert.carmodel}
           </Card.Text>
-          <Button variant="primary">Purchase</Button>
+          <Button variant="primary" onClick={func}>Purchase</Button>
         </Card.Body>
-        <Card.Footer className="text-muted">2 days ago</Card.Footer>
+        <Card.Footer className="text-muted">{mydate}</Card.Footer>
       </Card>
       <br />
     </advert>

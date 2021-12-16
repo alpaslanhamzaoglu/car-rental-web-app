@@ -13,10 +13,7 @@ const db = mysql.createPool({
 });
 
 let mail = "";
-let pass = "";
-let name = "";
-let info = "";
-let vac = "";
+let advert;
 
 app.use(cors());
 app.use(express.json());
@@ -64,6 +61,91 @@ app.post("/login", (req, res) => {
         }
     });
 });
+
+app.post("/buy", (req, res) => {
+    const name = req.body.name;
+    const email = req.body.email;
+    const card = req.body.card;
+    const cvv = req.body.cvv;
+    const date = req.body.date;
+
+    const year = parseInt(date.substring(0, 4));
+    const month = parseInt(date.substring(5, 7));
+    const day = parseInt(date.substring(8, 10));
+
+    let currentDate = new Date();
+
+    if(name == "" || email == "" || card == "" || cvv == "" || date == "") {
+        res.send({ message: "Incomplete Information" });
+    } else if(card.length != 16) {
+        res.send({ message: "Wrong Credit Card Number" });
+    } else if(cvv.length != 3) {
+        res.send({ message: "Wrong CVV" });
+    } else if(currentDate.getFullYear() > year || (currentDate.getFullYear() == year && currentDate.getMonth() + 1 > month) || (currentDate.getFullYear() == year && currentDate.getMonth() + 1 == month && currentDate.getDate() > day)) {
+        res.send({ message: "Card is expired" })
+    }
+    else {
+        const sqlSelect = "SELECT users.uid FROM users WHERE uemail = ?";
+        db.query(sqlSelect, [mail], (err, result) => { 
+            let uid;
+            uid = result[0].uid;
+
+            const sqlInsert = "INSERT INTO pastpurchase (aID, uID, purcdate, creditCardNumber, creditCardCVV, creditCardDate, creditCardName, creditCardEmail) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            db.query(sqlInsert, [advert.aID, uid, currentDate, card, cvv, date, name, email], (err, result) => { 
+                console.log(result, err);
+                res.send({ message: "Successful" });
+            });
+        });
+    };
+});
+
+app.post("/rent", (req, res) => {
+    const name = req.body.name;
+    const email = req.body.email;
+    const card = req.body.card;
+    const cvv = req.body.cvv;
+    const date = req.body.date;
+    const rentdate = req.body.rentdate;
+    const deliverdate = req.body.deliverdate;
+
+    const year = parseInt(date.substring(0, 4));
+    const month = parseInt(date.substring(5, 7));
+    const day = parseInt(date.substring(8, 10));
+
+    const rentYear = parseInt(rentdate.substring(0, 4));
+    const rentMonth = parseInt(rentdate.substring(5, 7));
+    const rentDay = parseInt(rentdate.substring(8, 10));
+
+    const deliverYear = parseInt(rentdate.substring(0, 4));
+    const deliverMonth = parseInt(rentdate.substring(5, 7));
+    const deliverDay = parseInt(rentdate.substring(8, 10));
+
+    let currentDate = new Date();
+
+    if(name == "" || email == "" || card == "" || cvv == "" || date == "") {
+        res.send({ message: "Incomplete Information" });
+    } else if(card.length != 16) {
+        res.send({ message: "Wrong Credit Card Number" });
+    } else if(cvv.length != 3) {
+        res.send({ message: "Wrong CVV" });
+    } else if(currentDate.getFullYear() > year || (currentDate.getFullYear() == year && currentDate.getMonth() + 1 > month) || (currentDate.getFullYear() == year && currentDate.getMonth() + 1 == month && currentDate.getDate() > day)) {
+        res.send({ message: "Card is expired" })
+    }
+    else {
+        const sqlSelect = "SELECT users.uid FROM users WHERE uemail = ?";
+        db.query(sqlSelect, [mail], (err, result) => { 
+            let uid;
+            uid = result[0].uid;
+
+            const sqlInsert = "INSERT INTO rentcarpurchase (cID, uID, rentpurcdate, creditCardNumber, creditCardCVV, creditCardDate, creditCardName, creditCardEmail, begindate, enddate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            db.query(sqlInsert, [advert.cID, uid, currentDate, card, cvv, date, name, email, rentdate, deliverdate], (err, result) => { 
+                console.log(result, err);
+                res.send({ message: "Successful" });
+            });
+        });
+    };
+});
+
 
 app.get("/profile", (req, res) => {
     const sqlInsert = "SELECT * FROM users WHERE uemail = ?"
@@ -196,6 +278,22 @@ app.get("/listing", (req, res) => {
     });
 });
 
+app.get("/carListing", (req, res) => {
+    const sqlInsert = "SELECT * FROM rentcars";
+    db.query(sqlInsert, [], (err, result) => {
+        if(err) {
+            console.log(err);
+        }
+        if(result) {
+            res.send(result);
+        }
+    });
+});
+
+app.get("/deneme", (req, res) => {
+    res.send(advert);
+});
+
 app.post("/filterSearch", (req, res) => {
     const departure = req.body.departure;
     const destination = req.body.destination;
@@ -205,30 +303,16 @@ app.post("/filterSearch", (req, res) => {
 
     console.log(departure);
 
-    // let sqlInsert = "SELECT * FROM advert WHERE (";
-    // if(departure != "") {
-    //     sqlInsert += "departure, ";
-    // }
-    // if(destination != "") {
-    //     sqlInsert += "destination, ";
-    // }
-    // if(depTime != "") {
-    //     sqlInsert += "deptime, ";
-    // }
-    // if(arrTime != "") {
-    //     sqlInsert += "arrTime, ";
-    // }
-    // if(date != "") {
-    //     sqlInsert += "adate, ";
-    // }
-    // sqlInsert = sqlInsert.substring(0, sqlInsert.length - 2);
-    // sqlInsert += ")";
-
     const sqlInsert = "SELECT * FROM advert WHERE (destination, deptime, departure, adate, arrtime) VALUES (?, ?, ?, ?, ?)"; 
     db.query(sqlInsert, [destination, departureTime, departure, adate, arrivalTime], (err, result) => {
         res.send(result);
     });
 
+});
+
+app.post("/purchase", (req, res) => {
+    advert = req.body.advert;
+    res.send({ message: "Success" });
 });
 
 app.listen(3001, () => {
