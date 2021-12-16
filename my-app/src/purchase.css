@@ -44,8 +44,8 @@
     margin-left: 48%;
   } 
 
-  #firstrow {
-      margin-top: 10%;
+  #firstrow1 {
+      margin-top: 7%;
   }
 
   #money {
@@ -57,4 +57,10 @@
   #advertss {
     padding-top: 5%;
     padding-left: 28%;
+  }
+
+  .pmes {
+    text-align: center;
+    margin-top: 5%;
+    font-size: 150%;
   }
