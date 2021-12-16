@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Axios from 'axios';
 
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Advert from './advert.js';
 
 document.body.style.background = "#9caeff"
@@ -32,6 +33,8 @@ function AdvertListing() {
     const setActiveSearch = () => setSearch(true);
     const setDeactiveSearch = () => setSearch(false);
 
+    const {state} = useLocation();
+
     let request = async () => {
         const response = await fetch('http://localhost:3001/listing');
         const data = await response.json();
@@ -41,15 +44,34 @@ function AdvertListing() {
     }
 
     const clearSearch = () => {
-        destination = "";
-        departure = "";
-        adate = "";
+        setDestination("");
+        setDeparture("");
+        setDate("");
         setFilteredData(adverts);
+        setDeactiveSearch();
+    }
+
+    const [count_, setCount] = useState(0);
+    const count1 = () => setCount(1);
+
+    const getState = () => {
+        const {destinationS, departureS, adateS, motorcycleCheckS, page} = state;
+        if(page == "home"){
+            setDestination(destinationS);
+            setDeparture(departureS);
+            setDate(adateS);
+            setMotor(motorcycleCheckS);
+            count1();
+        }
     }
 
     const handleSearch = () => {
         setActiveSearch();
         setFilteredData(adverts);
+
+        if(count_ < 1 && state != null) {
+            getState();
+        }
         
         if(destination != "") {
             let arr = [];
@@ -174,7 +196,7 @@ function AdvertListing() {
                         </Stack>
 
                         <Row>
-                            <Button as={Col} className="buttons1" variant="primary" onClick={clearSearch, setDeactiveSearch}>
+                            <Button as={Col} className="buttons1" variant="primary" onClick={clearSearch}>
                                 Clear Filter
                             </Button>
                             <Button as={Col} className="buttons2" variant="primary" onClick={handleSearch}>
