@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import Axios from 'axios'
+import Axios from 'axios';
 import './advert.css';
 
 function Advert(props) {
@@ -14,6 +14,14 @@ function Advert(props) {
     Axios.post("http://localhost:3001/purchase", { advert : props.advert }).then(function (response) {
       if(response.data.message == "Success") {
         navigate("/purchase");
+      }
+    })
+  }
+
+  const func2 = () => {
+    Axios.post("http://localhost:3001/sendid", { uid : props.advert.uid }).then(function (response) {
+      if(response.data.message == "Success") {
+        navigate("/profile2");
       }
     })
   }
