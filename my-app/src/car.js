@@ -10,7 +10,7 @@ function Car(props) {
 
   const func = () => {
     Axios.post("http://localhost:3001/purchase", { advert : props.advert }).then(function (response) {
-      if(response.data.message == "Success") {
+      if(response.data.message === "Success") {
         navigate("/rentalpurchase");
       }
     })

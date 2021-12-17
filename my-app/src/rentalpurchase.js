@@ -32,9 +32,9 @@ function Purchase() {
                 alert(response.data.message);
             }
         })
-        .catch(function (error) {
-            console.log(error);
-        });
+            .catch(function (error) {
+                console.log(error);
+            });
     };
 
     let request = async () => {
