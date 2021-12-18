@@ -44,8 +44,8 @@
     margin-left: 48%;
   } 
 
-  #firstrow {
-      margin-top: 10%;
+  #firstrow1 {
+      margin-top: 7%;
   }
 
   #money {
@@ -54,21 +54,13 @@
       padding-top: 1.8%;
   }
 
-  .buttons1 {
-    width: "100px";
-    height: "30px";
-    margin-left: 30%;
-    margin-right: 5%;
-  }
-
-  .buttons2 {
-    width: "100px";
-    height: "30px";
-    margin-right: 30%;
-    margin-left: 5%;
-  }
-
   #advertss {
     padding-top: 5%;
     padding-left: 28%;
+  }
+
+  .pmes {
+    text-align: center;
+    margin-top: 5%;
+    font-size: 150%;
   }

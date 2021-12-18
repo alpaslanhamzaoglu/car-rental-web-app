@@ -21,6 +21,29 @@
     transform: rotate(30deg);
   }
 
+  .loginbutton {
+    margin-left: 16%;
+    margin-top: 2%;
+  }
+
+  .forgotpassword {
+    margin-left: 58%;
+  }
+
+  .passwordformforgot {
+    margin-top: 40%;
+    margin-bottom: 2%;
+  }
+
+  .passwordrepeat {
+    margin-bottom: 2%;
+  }
+
+  .registerButton {
+    margin-bottom: 2%;
+    margin-left: 48%;
+  } 
+
   #firstrow {
       margin-top: 10%;
   }
@@ -29,4 +52,9 @@
       align-items: flex-end;
       height: 0ch;
       padding-top: 1.8%;
+  }
+
+  #advertss {
+    padding-top: 5%;
+    padding-left: 28%;
   }
