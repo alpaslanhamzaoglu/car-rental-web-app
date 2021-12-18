@@ -1,7 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Container, Col, FloatingLabel } from 'react-bootstrap';
+import { Button, Row, Container, Col, Card } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Axios from 'axios'
 import './profile2.css';
@@ -71,6 +71,21 @@ function Profile2() {
                         <Col xs lg="6">Number of covid vaccination the user had is {vac - 1}.</Col>
                     </Row>
                 </Container>
+
+                <Card id="cardprof" >
+                    <Card.Header>h</Card.Header>
+                    <Card.Body>
+                        <Card.Title>k</Card.Title>
+                        <Card.Text id="cardtextlink">
+                            kullanici
+                        </Card.Text>
+                        <Card.Text>
+                            h
+                        </Card.Text>
+                        <Button variant="primary">Purchase</Button>
+                    </Card.Body>
+                    <Card.Footer className="text-muted">h</Card.Footer>
+                </Card>
             </div>
         </div>
 

@@ -1,16 +1,16 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './advertlisting.css';
-import { Form, Button, Row, Container, Col, Dropdown } from 'react-bootstrap';
+import { Form, Button, Row, Container, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Axios from 'axios';
 
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Advert from './advert.js';
 
 document.body.style.background = "#9caeff"
@@ -32,6 +32,8 @@ function AdvertListing() {
     const setActiveSearch = () => setSearch(true);
     const setDeactiveSearch = () => setSearch(false);
 
+    const {state} = useLocation();
+
     let request = async () => {
         const response = await fetch('http://localhost:3001/listing');
         const data = await response.json();
@@ -41,18 +43,36 @@ function AdvertListing() {
     }
 
     const clearSearch = () => {
-        setDeparture("");
         setDestination("");
+        setDeparture("");
         setDate("");
-        setDeactiveSearch();
         setFilteredData(adverts);
+        setDeactiveSearch();
+    }
+
+    const [count_, setCount] = useState(0);
+    const count1 = () => setCount(1);
+
+    const getState = () => {
+        const {destinationS, departureS, adateS, motorcycleCheckS, page} = state;
+        if(page == "home"){
+            setDestination(destinationS);
+            setDeparture(departureS);
+            setDate(adateS);
+            setMotor(motorcycleCheckS);
+            count1();
+        }
     }
 
     const handleSearch = () => {
         setActiveSearch();
         setFilteredData(adverts);
+
+        if(count_ < 1 && state != null) {
+            getState();
+        }
         
-        if(destination != "") {
+        if(destination !== "") {
             let arr = [];
             for(let i = 0; i < filteredData.length; i++) {
                 if(filteredData[i].destination.includes(destination)) {
@@ -61,7 +81,7 @@ function AdvertListing() {
             }
             setFilteredData(arr);
         }
-        if(departure != "") {
+        if(departure !== "") {
             let arr = [];
             for(let i = 0; i < filteredData.length; i++) {
                 if(filteredData[i].departure.includes(departure)) {
@@ -70,7 +90,7 @@ function AdvertListing() {
             }
             setFilteredData(arr);
         }
-        if(adate != "") {
+        if(adate !== "") {
             let inputYear = parseInt(adate.substring(0, 4));
             let inputMonth = parseInt(adate.substring(5, 7));
             let inputDay = parseInt(adate.substring(8, 10));
@@ -81,7 +101,7 @@ function AdvertListing() {
                 let tempMonth = parseInt(filteredData[i].adate.substring(5, 7));
                 let tempDay = parseInt(filteredData[i].adate.substring(8, 10));
 
-                if(inputYear == tempYear && inputMonth == tempMonth && inputDay == tempDay) {
+                if(inputYear === tempYear && inputMonth === tempMonth && inputDay === tempDay) {
 
                     arr.push(filteredData[i]);
                 }
