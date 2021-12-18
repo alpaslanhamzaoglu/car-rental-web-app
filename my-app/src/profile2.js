@@ -24,6 +24,8 @@ function Profile2() {
     let request = async () => {
         const response = await fetch('http://localhost:3001/profile2');
         const data = await response.json();
+
+        console.log(data);
         dataName(data[0].uname);
         //dataPass(data[0].password);
         dataMail(data[0].uemail);

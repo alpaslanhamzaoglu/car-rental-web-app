@@ -39,6 +39,13 @@ function Home() {
         }
     });
 
+    let logout = async () => {
+        const response = await fetch('http://localhost:3001/logout');
+        const data = await response.json();
+
+        console.log(data);
+    };
+
     const pages = ['Create an Advert', 'Adverts Listing', 'Car Rental'];
     const settings = ['Login', 'Register', 'Profile', 'Logout'];
 
@@ -73,6 +80,9 @@ function Home() {
         }
         if(namePage === 'Profile'){
             navigate("/profile");
+        }
+        if(namePage == 'Logout'){
+            logout();
         }
     };
 
