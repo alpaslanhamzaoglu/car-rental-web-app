@@ -308,6 +308,10 @@ app.get("/deneme", (req, res) => {
     res.send(advert);
 });
 
+app.get("/logout", (req, res) => {
+    mail = "";
+});
+
 app.post("/filterSearch", (req, res) => {
     const departure = req.body.departure;
     const destination = req.body.destination;
@@ -332,6 +336,19 @@ app.post("/purchase", (req, res) => {
 app.post("/sendid", (req, res) => {
     uid = req.body.uid;
     res.send({ message: "Success" });
+});
+
+app.post("/getname", (req, res) => {
+    const sqlInsert = "SELECT * FROM users WHERE uid = ?"
+    db.query(sqlInsert, [req.body.uid], (err, result) => {
+        if(err) {
+            console.log(err);
+        }
+
+        if(result) {
+            res.send({ name: result[0].uname });
+        }
+    });
 });
 
 app.listen(3001, () => {
