@@ -1,14 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './advertlisting.css';
-import { Form, Button, Row, Container, Col, Dropdown } from 'react-bootstrap';
+import { Form, Button, Row, Container, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Axios from 'axios';
 
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -20,7 +19,7 @@ function AdvertListing() {
 
     const [adverts, setAdverts] = useState([]);
 
-    const [filteredData, setFilteredData] = useState(adverts);
+    const [filteredData, setFilteredData] = useState([]);
 
     const [motorcycleCheck, setMotor] = useState(false);
     const changeVeh = () => setMotor(!motorcycleCheck); //backend for switch should be implemented
@@ -73,7 +72,7 @@ function AdvertListing() {
             getState();
         }
         
-        if(destination != "") {
+        if(destination !== "") {
             let arr = [];
             for(let i = 0; i < filteredData.length; i++) {
                 if(filteredData[i].destination.includes(destination)) {
@@ -82,7 +81,7 @@ function AdvertListing() {
             }
             setFilteredData(arr);
         }
-        if(departure != "") {
+        if(departure !== "") {
             let arr = [];
             for(let i = 0; i < filteredData.length; i++) {
                 if(filteredData[i].departure.includes(departure)) {
@@ -91,7 +90,7 @@ function AdvertListing() {
             }
             setFilteredData(arr);
         }
-        if(adate != "") {
+        if(adate !== "") {
             let inputYear = parseInt(adate.substring(0, 4));
             let inputMonth = parseInt(adate.substring(5, 7));
             let inputDay = parseInt(adate.substring(8, 10));
@@ -102,13 +101,14 @@ function AdvertListing() {
                 let tempMonth = parseInt(filteredData[i].adate.substring(5, 7));
                 let tempDay = parseInt(filteredData[i].adate.substring(8, 10));
 
-                if(inputYear == tempYear && inputMonth == tempMonth && inputDay == tempDay) {
+                if(inputYear === tempYear && inputMonth === tempMonth && inputDay === tempDay) {
 
                     arr.push(filteredData[i]);
                 }
             }
             setFilteredData(arr);
         }
+        console.log(filteredData);
     }
 
     useEffect(() => {
@@ -210,7 +210,7 @@ function AdvertListing() {
             <section className="Filter">
                 {searchActive ? (
                     <div className="Adverts" id="advertss">
-                        {(filteredData != null) ? filteredData.map((advert, index) => <Advert key={index} advert={advert} />) : ''}
+                        {(filteredData != null) ? filteredData.map((advert, index) => <Advert key={index} advert={advert} onClick={clearSearch} />) : ''}
                     </div>
                 ) : (
                     <div className="Adverts" id="advertss">

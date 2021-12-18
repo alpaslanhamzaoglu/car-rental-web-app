@@ -89,7 +89,7 @@ function AdvertCreation() {
                             </Form.Group>
                         </Row>
 
-                        <Button variant="primary" type="submit" onClick={submitMail}>
+                        <Button variant="primary" onClick={submitMail}>
                             Create
                         </Button>
                     </Form>

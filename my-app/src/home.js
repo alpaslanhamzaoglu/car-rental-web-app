@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './home.css';
 // import './login.css';
 import { Link } from "react-router-dom";
+
 import { useNavigate } from "react-router-dom";
 import { Form, Row, Button, Col, Dropdown } from 'react-bootstrap';
 
@@ -23,7 +24,6 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/styles';
-import { fontSize } from '@mui/system';
 
 document.body.style.background = "#9caeff"
 
@@ -56,22 +56,22 @@ function Home() {
     const handleCloseNavMenu = (name) => {
         setAnchorElNav(null);
         setPage(name);
-        if(namePage == 'Create an Advert'){
+        if(namePage === 'Create an Advert'){
             navigate("/advertcreation");
         }
-        if(namePage == 'Adverts Listing'){
+        if(namePage === 'Adverts Listing'){
             navigate("/advertlisting");
         }
-        if(namePage == 'Car Rental'){
+        if(namePage === 'Car Rental'){
             navigate("/carrental");
         }
-        if(namePage == 'Login'){
+        if(namePage === 'Login'){
             navigate("/login");
         }
-        if(namePage == 'Register'){
+        if(namePage === 'Register'){
             navigate("/register");
         }
-        if(namePage == 'Profile'){
+        if(namePage === 'Profile'){
             navigate("/profile");
         }
     };

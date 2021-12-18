@@ -5,12 +5,15 @@ import { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { Form, Button, Row, Container, Col } from 'react-bootstrap';
 import { useState } from 'react';
+import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Axios from 'axios'
 
 document.body.style.background = "#9caeff"
 
 function Purchase() {
+
+    const navigate = useNavigate();
+
     const [advert, setAdvert] = useState();
 
     const [name, setName] = useState("");
@@ -18,20 +21,20 @@ function Purchase() {
     const [card, setCard] = useState("");
     const [cvv, setCvv] = useState("");
     const [date, setDate] = useState("");
-
-    const navigate = useNavigate();
+    const [rentdate, setRentDate] = useState("");
+    const [deliverdate, setDeliverDate] = useState("");
 
     const submitCard = () => {
-        Axios.post("http://localhost:3001/buy", { name: name, email: email, card: card, cvv: cvv, date: date }).then(function (response) {
+        Axios.post("http://localhost:3001/rent", { name: name, email: email, card: card, cvv: cvv, date: date, rentdate: rentdate, deliverdate: deliverdate }).then(function (response) {
             if (response.data.message === "Successful") {
                 navigate("/home");
             } else {
                 alert(response.data.message);
             }
         })
-        .catch(function (error) {
-            console.log(error);
-        });
+            .catch(function (error) {
+                console.log(error);
+            });
     };
 
     let request = async () => {
@@ -63,6 +66,18 @@ function Purchase() {
                 <Container>
                     <Form>
                         <Row className="mb-3" id="firstrow1">
+                            <Form.Group as={Col} controlId="formGridEmail" onChange={(e) => { setRentDate(e.target.value) }}>
+                                <Form.Label>Beginning of Rent</Form.Label>
+                                <input type="date" id="beginrent" class="form-control"></input>
+                            </Form.Group>
+
+                            <Form.Group as={Col} controlId="formGridPassword" onChange={(e) => { setDeliverDate(e.target.value) }}>
+                                <Form.Label>End of Rent</Form.Label>
+                                <input type="date" id="endrent" class="form-control"></input>
+                            </Form.Group>
+                        </Row>
+
+                        <Row className="mb-3">
                             <Form.Group as={Col} controlId="formGridEmail" onChange={(e) => { setName(e.target.value) }}>
                                 <Form.Label>Name on Card</Form.Label>
                                 <Form.Control type="text" placeholder="" />
