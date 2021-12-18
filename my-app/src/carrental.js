@@ -1,7 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './carrental.css';
-import { Form, Button, Row, Container, Col, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 
 import { Link } from "react-router-dom";

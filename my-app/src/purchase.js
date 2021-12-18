@@ -2,8 +2,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './purchase.css';
 import { useEffect } from 'react';
-import { Link, Navigate } from "react-router-dom";
-import { Form, Button, Row, Container, Col, InputGroup, FormControl } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import { Form, Button, Row, Container, Col } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios'
