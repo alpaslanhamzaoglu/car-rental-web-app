@@ -1,7 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
-import { Button, Row, Container, Col, Card } from 'react-bootstrap';
+import { Button, Row, Container, Col, Card, InputGroup, FormControl } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Axios from 'axios'
 import './profile2.css';
@@ -72,20 +72,31 @@ function Profile2() {
                     </Row>
                 </Container>
 
-                <Card id="cardprof" >
-                    <Card.Header>h</Card.Header>
-                    <Card.Body>
-                        <Card.Title>k</Card.Title>
-                        <Card.Text id="cardtextlink">
-                            kullanici
-                        </Card.Text>
-                        <Card.Text>
-                            h
-                        </Card.Text>
-                        <Button variant="primary">Purchase</Button>
-                    </Card.Body>
-                    <Card.Footer className="text-muted">h</Card.Footer>
-                </Card>
+                <div id="commentbox">
+                    <InputGroup className="mb-3">
+                        <FormControl
+                            placeholder="Make a comment for this user"
+                            aria-label="Recipient's username"
+                            aria-describedby="basic-addon2"
+                        />
+                        <Button variant="outline-secondary" id="button-addon2">
+                            Send
+                        </Button>
+                    </InputGroup>
+                </div>
+
+                <div id="comments">
+                    <Card className="text-center" style={{ width: '50rem' }}>
+                        <Card.Header></Card.Header>
+                        <Card.Body>
+                            <Card.Title>f</Card.Title>
+                            <Card.Text>
+                                f
+                            </Card.Text>
+                        </Card.Body>
+                        <Card.Footer className="text-muted"></Card.Footer>
+                    </Card>
+                </div>
             </div>
         </div>
 
