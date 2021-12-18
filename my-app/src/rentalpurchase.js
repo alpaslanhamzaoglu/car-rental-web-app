@@ -106,7 +106,7 @@ function Purchase() {
                             </Form.Group>
                         </Row>
 
-                        <Button id="buybutton" variant="primary" type="submit" onClick={submitCard}>
+                        <Button id="buybutton" variant="primary" onClick={submitCard}>
                             Buy
                         </Button>
                     </Form>
