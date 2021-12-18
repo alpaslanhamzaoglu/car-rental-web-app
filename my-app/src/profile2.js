@@ -42,6 +42,7 @@ function Profile2() {
 
     useEffect(() => {
         request();
+        requestReview();
     }, [])
 
     return (

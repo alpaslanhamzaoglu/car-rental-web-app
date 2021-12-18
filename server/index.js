@@ -292,6 +292,13 @@ app.get("/listing", (req, res) => {
     });
 });
 
+app.get("/reviews", (req, res) => {
+    const sqlSelect = "SELECT * FROM review WHERE uid = ?";
+    db.query(sqlSelect, [uid], (err, result) => {
+        res.send(result);
+    });
+});
+
 app.get("/carListing", (req, res) => {
     const sqlInsert = "SELECT * FROM rentcars";
     db.query(sqlInsert, [], (err, result) => {
