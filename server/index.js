@@ -14,6 +14,7 @@ const db = mysql.createPool({
 
 let mail = "";
 let advert;
+let uid;
 
 app.use(cors());
 app.use(express.json());
@@ -112,11 +113,9 @@ app.post("/rent", (req, res) => {
     const month = parseInt(date.substring(5, 7));
     const day = parseInt(date.substring(8, 10));
 
-    const rentYear = parseInt(rentdate.substring(0, 4));
     const rentMonth = parseInt(rentdate.substring(5, 7));
     const rentDay = parseInt(rentdate.substring(8, 10));
 
-    const deliverYear = parseInt(rentdate.substring(0, 4));
     const deliverMonth = parseInt(rentdate.substring(5, 7));
     const deliverDay = parseInt(rentdate.substring(8, 10));
 
@@ -129,7 +128,9 @@ app.post("/rent", (req, res) => {
     } else if(cvv.length != 3) {
         res.send({ message: "Wrong CVV" });
     } else if(currentDate.getFullYear() > year || (currentDate.getFullYear() == year && currentDate.getMonth() + 1 > month) || (currentDate.getFullYear() == year && currentDate.getMonth() + 1 == month && currentDate.getDate() > day)) {
-        res.send({ message: "Card is expired" })
+        res.send({ message: "Card is expired" });
+    } else if(rentMonth > deliverMonth || (deliverMonth == rentMonth && rentDay > deliverDay)) {
+        res.send({ message: "Rent Date can't be bigger than Deliver Date" });
     }
     else {
         const sqlSelect = "SELECT users.uid FROM users WHERE uemail = ?";
@@ -150,6 +151,19 @@ app.post("/rent", (req, res) => {
 app.get("/profile", (req, res) => {
     const sqlInsert = "SELECT * FROM users WHERE uemail = ?"
     db.query(sqlInsert, [mail], (err, result) => {
+        if(err) {
+            console.log(err);
+        }
+
+        if(result) {
+            res.send(result);
+        }
+    });
+});
+
+app.get("/profile2", (req, res) => {
+    const sqlInsert = "SELECT * FROM users WHERE uid = ?"
+    db.query(sqlInsert, [uid], (err, result) => {
         if(err) {
             console.log(err);
         }
@@ -255,8 +269,8 @@ app.post("/advertCreation", (req, res) => {
         uid = result[0].uid;
 
         if(destination != "" && departureTime != "" && arrivalTime != "" && departure != "" && carmodel != "" && price != "" && adate != "") {
-            const sqlInsert = "INSERT INTO advert (destination, deptime, departure, carmodel, price, adate, arrtime) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            db.query(sqlInsert, [destination, departureTime, departure, carmodel, price, adate, arrivalTime], (err, result) => { 
+            const sqlInsert = "INSERT INTO advert (destination, deptime, departure, carmodel, price, adate, arrtime, uID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            db.query(sqlInsert, [destination, departureTime, departure, carmodel, price, adate, arrivalTime, uid], (err, result) => { 
                 console.log(result, err);
                 res.send({ message: "Successful" });
             });
@@ -312,6 +326,11 @@ app.post("/filterSearch", (req, res) => {
 
 app.post("/purchase", (req, res) => {
     advert = req.body.advert;
+    res.send({ message: "Success" });
+});
+
+app.post("/sendid", (req, res) => {
+    uid = req.body.uid;
     res.send({ message: "Success" });
 });
 

@@ -12,6 +12,7 @@ function Profile2() {
     const [mail, dataMail] = useState("");
     const [vac, dataVac] = useState("");
     const [info, dataInfo] = useState("");
+    const [reviews, dataReview] = useState([]);
 
     const [uname, setName] = useState("");
     const [uemail, setMail] = useState("");
@@ -21,7 +22,7 @@ function Profile2() {
     const [infos, setInfos] = useState("");
 
     let request = async () => {
-        const response = await fetch('http://localhost:3001/profile');
+        const response = await fetch('http://localhost:3001/profile2');
         const data = await response.json();
         dataName(data[0].uname);
         //dataPass(data[0].password);
@@ -30,18 +31,16 @@ function Profile2() {
         dataInfo(data[0].infos);
     }
 
+    let requestReview = async () => {
+        const response = await fetch('http://localhost:3001/reviews');
+        const data = await response.json();
+
+        dataReview(data);
+    }
+
     useEffect(() => {
         request();
     }, [])
-
-    const submitMail = () => {
-        Axios.post("http://localhost:3001/changeProfile", {
-            uemail: uemail, password: password, pass_repeat: pass_repeat,
-            uname: uname, covidvac: covidvac, infos: infos
-        }).then(function (response) {
-            console.log(response);
-        });
-    };
 
     return (
         <div className="Profile2">
