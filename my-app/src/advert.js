@@ -47,9 +47,19 @@ function Advert(props) {
           <Card.Text onClick={func2} id="cardtextlink">
             {name}
           </Card.Text>
-          <Card.Text>
-            {props.advert.carmodel}
-          </Card.Text>
+          {(() => {
+            if (props.advert.motorcycle == 0) {
+              return  <Card.Text>
+                        Car: {props.advert.carmodel}
+                      </Card.Text>;
+            } else {
+              return  <Card.Text>
+                        Motorcycle: {props.advert.carmodel}
+                      </Card.Text>;
+            }
+          })()
+          }
+          
           <Button variant="primary" onClick={func}>Purchase</Button>
         </Card.Body>
         <Card.Footer className="text-muted">{mydate}</Card.Footer>

@@ -3,3 +3,25 @@
     height: "30px";
     align-items: "center";
 }
+.gee{
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    padding-top: 1%;
+    padding-left: 14%;
+    padding-bottom: 1.5%;
+    z-index:-1;
+}
+.p2 {
+    text-align: center;
+    color: rgb(144, 0, 0);
+    font-weight: bold;
+    font-size: 200%;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+  }
