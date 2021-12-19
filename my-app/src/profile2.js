@@ -5,6 +5,7 @@ import { Button, Row, Container, Col, Card, InputGroup, FormControl } from 'reac
 import { useState, useEffect } from 'react';
 import Axios from 'axios'
 import './profile2.css';
+import Review from './review.js';
 
 function Profile2() {
     const [name, dataName] = useState("");
@@ -14,12 +15,7 @@ function Profile2() {
     const [info, dataInfo] = useState("");
     const [reviews, dataReview] = useState([]);
 
-    const [uname, setName] = useState("");
-    const [uemail, setMail] = useState("");
-    const [password, setPassword] = useState("");
-    const [pass_repeat, setPassRepeat] = useState("");
-    const [covidvac, setCovidVac] = useState("");
-    const [infos, setInfos] = useState("");
+    const [comment, setComment] = useState("");
 
     let request = async () => {
         const response = await fetch('http://localhost:3001/profile2');
@@ -39,6 +35,19 @@ function Profile2() {
 
         dataReview(data);
     }
+
+    const addComment = () => {
+        Axios.post("http://localhost:3001/addcomment", { comment: comment }).then(function (response) {
+          if (response.data.message === "No Comment") {
+            alert(response.data.message);
+          } else {
+            window.location.href = "/profile2";
+          }
+        })
+          .catch(function (error) {
+            console.log(error);
+          });
+      };
 
     useEffect(() => {
         request();
@@ -79,25 +88,17 @@ function Profile2() {
                             placeholder="Make a comment for this user"
                             aria-label="Recipient's username"
                             aria-describedby="basic-addon2"
+                            onChange={(e) => { setComment(e.target.value) }}
                         />
-                        <Button variant="outline-secondary" id="button-addon2">
+                        <Button variant="outline-secondary" id="button-addon2" onClick={addComment}>
                             Send
                         </Button>
                     </InputGroup>
                 </div>
-
-                <div id="comments">
-                    <Card className="text-center" style={{ width: '50rem' }}>
-                        <Card.Header></Card.Header>
-                        <Card.Body>
-                            <Card.Title>f</Card.Title>
-                            <Card.Text>
-                                f
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer className="text-muted"></Card.Footer>
-                    </Card>
+                <div className="Adverts" id="advertss">
+                    {(reviews != null) ? reviews.map((advert, index) => <Review key={index} advert={advert} />) : ''}
                 </div>
+                
             </div>
         </div>
 
