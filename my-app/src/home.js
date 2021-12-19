@@ -31,7 +31,7 @@ document.body.style.background = "#9caeff"
 function Home() {
     const navigate = useNavigate();
 
-    let log = false;
+    const [log, setLog] = useState();
 
 
     const theme = createTheme(theme, {
@@ -52,27 +52,18 @@ function Home() {
     let request = async () => {
         const response = await fetch('http://localhost:3001/logged');
         const data = await response.json();
-        log = data;
-        console.log(log);
-        if(log == true){
-            pages = ['Create an Advert', 'Adverts Listing', 'Car Rental'];
-            settings = ['Profile', 'Logout'];
-        }
-        else{
-            pages = ['Adverts Listing', 'Car Rental'];
-            settings = ['Login', 'Register'];
-            console.log("aaaaa");
-        }
-    };
+        setLog(data);
+    }
     
     useEffect(() => {
         request();
-    }, []);
+    }, [])
 
-    let pages = ['Adverts Listing', 'Car Rental'];
-    let settings = ['Login', 'Register'];
-    
-    
+    const pages_logged = ['Create an Advert', 'Adverts Listing', 'Car Rental'];
+    const settings_logged = ['Profile', 'Logout'];
+
+    const pages_notlog = ['Adverts Listing', 'Car Rental'];
+    const settings_notlog = ['Login', 'Register'];
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -212,11 +203,16 @@ function Home() {
                                             display: { xs: 'block', md: 'none' },
                                         }}
                                     >
-                                        {pages.map((page) => (
+                                        {log ? pages_logged.map((page) => (
                                             <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
                                             <Typography textAlign="center">{page}</Typography>
                                             </MenuItem>
-                                        ))}
+                                            )) : pages_notlog.map((page) => (
+                                                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
+                                                <Typography textAlign="center">{page}</Typography>
+                                                </MenuItem>
+                                            ))
+                                        }
                                     </Menu>
                                 </Box>
                                 <Typography
@@ -229,15 +225,24 @@ function Home() {
                                     AGA Carpooling
                                 </Typography>
                                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                                    {pages.map((page) => (
-                                    <Button
-                                        key={page}
-                                        onClick={() => handleCloseNavMenu(page)}
-                                        sx={{ my: 2, color: 'white', display: 'block' }}
-                                    >
-                                        {page}
-                                    </Button>
-                                    ))}
+                                    {log ? pages_logged.map((page) => (
+                                        <Button
+                                            key={page}
+                                            onClick={() => handleCloseNavMenu(page)}
+                                            sx={{ my: 2, color: 'white', display: 'block' }}
+                                        >
+                                            {page}
+                                        </Button>
+                                        )) : pages_notlog.map((page) => (
+                                            <Button
+                                                key={page}
+                                                onClick={() => handleCloseNavMenu(page)}
+                                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                            >
+                                                {page}
+                                            </Button>
+                                        ))
+                                    }
                                 </Box>
                         
                                 <Box sx={{ flexGrow: 0 }}>
@@ -262,11 +267,16 @@ function Home() {
                                     open={Boolean(anchorElUser)}
                                     onClose={handleCloseUserMenu}
                                     >
-                                    {settings.map((setting) => (
+                                    {log ? settings_logged.map((setting) => (
                                         <MenuItem key={setting} onClick={() => handleCloseNavMenu(setting)}>
                                         <Typography textAlign="center">{setting}</Typography>
                                         </MenuItem>
-                                    ))}
+                                        )) : settings_notlog.map((setting) => (
+                                            <MenuItem key={setting} onClick={() => handleCloseNavMenu(setting)}>
+                                            <Typography textAlign="center">{setting}</Typography>
+                                            </MenuItem>
+                                        ))
+                                    }
                                     </Menu>
                                 </Box>
                             </Toolbar>
