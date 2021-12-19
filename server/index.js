@@ -48,6 +48,8 @@ app.post("/login", (req, res) => {
     const password = req.body.password;
     const sqlInsert = "SELECT * FROM users WHERE uemail = ? AND password = ?";
 
+    console.log(uid);
+
     db.query(sqlInsert, [uemail, password], (err, result) => {
         if (err) {
             console.log("error");
@@ -61,6 +63,32 @@ app.post("/login", (req, res) => {
             res.send({ message: "Wrong username/password combination" });
         }
     });
+});
+
+app.post("/addcomment", (req, res) => {
+    const comment = req.body.comment;
+
+    if(comment == "") {
+        res.send({ message: "No Comment" });
+    } else {
+        const sqlSelect = "SELECT * FROM users WHERE uemail = ?";
+        db.query(sqlSelect, [mail], (err, result) => {
+            if(err) {
+                console.log("error");
+                res.send({ err: err });
+            }
+            console.log(result);
+            let id = result[0].uID;
+            const sqlInsert = "INSERT INTO review (uID, comment, userid) VALUES (?, ?, ?)";
+            db.query(sqlInsert, [uid, comment, id], (err, result) => {
+                if(err) {
+                    console.log("error");
+                    res.send({ err: err });
+                }
+                res.send({ message: "Successful" });
+            });
+        });
+    }
 });
 
 app.post("/buy", (req, res) => {
@@ -289,6 +317,13 @@ app.get("/listing", (req, res) => {
         if(result) {
             res.send(result);
         }
+    });
+});
+
+app.get("/reviews", (req, res) => {
+    const sqlSelect = "SELECT * FROM review WHERE uid = ?";
+    db.query(sqlSelect, [uid], (err, result) => {
+        res.send(result);
     });
 });
 
