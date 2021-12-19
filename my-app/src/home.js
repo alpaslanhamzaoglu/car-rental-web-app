@@ -31,7 +31,7 @@ document.body.style.background = "#9caeff"
 function Home() {
     const navigate = useNavigate();
 
-    const [log, setLog] = useState();
+    let log = false;
 
 
     const theme = createTheme(theme, {
@@ -52,15 +52,27 @@ function Home() {
     let request = async () => {
         const response = await fetch('http://localhost:3001/logged');
         const data = await response.json();
-        setLog(data);
-    }
+        log = data;
+        console.log(log);
+        if(log == true){
+            pages = ['Create an Advert', 'Adverts Listing', 'Car Rental'];
+            settings = ['Profile', 'Logout'];
+        }
+        else{
+            pages = ['Adverts Listing', 'Car Rental'];
+            settings = ['Login', 'Register'];
+            console.log("aaaaa");
+        }
+    };
     
     useEffect(() => {
         request();
-    }, [])
+    }, []);
 
-    const pages = ['Create an Advert', 'Adverts Listing', 'Car Rental'];
-    const settings = ['Login', 'Register', 'Profile', 'Logout'];
+    let pages = ['Adverts Listing', 'Car Rental'];
+    let settings = ['Login', 'Register'];
+    
+    
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);

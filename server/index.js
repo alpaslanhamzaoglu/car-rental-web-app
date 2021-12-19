@@ -16,12 +16,7 @@ let mail = "";
 let advert;
 let uid;
 
-app.get("/logged", (req, res) => {
-    if(mail == "")
-        res.send(false);
-    else
-        res.send(true);
-});
+
 
 app.use(cors());
 app.use(express.json());
