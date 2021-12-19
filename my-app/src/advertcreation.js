@@ -6,6 +6,11 @@ import { Form, Button, Row, Container, Col, InputGroup, FormControl } from 'reac
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 
+import { styled } from '@mui/material/styles';
+import Switch from '@mui/material/Switch';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+
 document.body.style.background = "#9caeff"
 
 function AdvertCreation() {
@@ -21,11 +26,63 @@ function AdvertCreation() {
     const submitMail = () => {
         Axios.post("http://localhost:3001/advertCreation", {
             destination: destination, departureTime: departureTime,
-            arrivalTime: arrivalTime, departure: departure, carmodel: carmodel, price: price, adate: adate
+            arrivalTime: arrivalTime, departure: departure, carmodel: carmodel, price: price, adate: adate,
+            motorcycle: motorcycleCheck
         }).then(function (response) {
             console.log(response);
+            if (response.data.message === "Successful") {
+                window.location.href = "/home";
+              } else {
+                alert(response.data.message);
+              }
         });
     };
+
+    const [motorcycleCheck, setMotor] = useState(false);
+    const changeVeh = () => setMotor(!motorcycleCheck);
+
+    const AntSwitch = styled(Switch)(({ theme }) => ({
+        width: 28,
+        height: 16,
+        padding: 0,
+        justifyContent:'center',
+        display: 'flex',
+        '&:active': {
+          '& .MuiSwitch-thumb': {
+            width: 15,
+          },
+          '& .MuiSwitch-switchBase.Mui-checked': {
+            transform: 'translateX(9px)',
+          },
+        },
+        '& .MuiSwitch-switchBase': {
+          padding: 2,
+          '&.Mui-checked': {
+            transform: 'translateX(12px)',
+            color: '#fff',
+            '& + .MuiSwitch-track': {
+              opacity: 1,
+              backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : '#1890ff',
+            },
+          },
+        },
+        '& .MuiSwitch-thumb': {
+          boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
+          width: 12,
+          height: 12,
+          borderRadius: 6,
+          transition: theme.transitions.create(['width'], {
+            duration: 200,
+          }),
+        },
+        '& .MuiSwitch-track': {
+          borderRadius: 16 / 2,
+          opacity: 1,
+          backgroundColor:
+            theme.palette.mode === 'dark' ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.25)',
+          boxSizing: 'border-box',
+        },
+      }));
 
     return (
         <div className="AdvertCreation">
@@ -75,6 +132,12 @@ function AdvertCreation() {
                                 </div>
                             </Form.Group>
                         </Row>
+
+                        <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" marginBottom={2}>
+                            <Typography>Motorcycle</Typography>
+                            <AntSwitch checked={!motorcycleCheck} onChange={changeVeh} inputProps={{ 'aria-label': 'ant design' }} />
+                            <Typography>Car</Typography>
+                        </Stack>
 
                         <Row className="mb-3">
                             <InputGroup as={Col} controlId="formGridMoney" id="money" onChange={(e) => { setPrice(e.target.value) }}>
