@@ -40,6 +40,7 @@ function AdvertListing() {
 
         setAdverts(data);
         setFilteredData(data);
+        console.log(data[0].motorcycle);
     }
 
     const clearSearch = () => {
@@ -72,6 +73,26 @@ function AdvertListing() {
 
         if(count_ < 1 && state != null) {
             getState();
+        }
+
+        if(!motorcycleCheck) {
+            let arr = [];
+            for(let i = 0; i < filteredData.length; i++) {
+                if(filteredData[i].motorcycle == 0) {
+                    arr.push(temp[i]);
+                }
+            }
+            temp = arr;
+        }
+
+        if(motorcycleCheck) {
+            let arr = [];
+            for(let i = 0; i < filteredData.length; i++) {
+                if(filteredData[i].motorcycle == 1) {
+                    arr.push(temp[i]);
+                }
+            }
+            temp = arr;
         }
         
         if(destination !== "") {
@@ -113,6 +134,9 @@ function AdvertListing() {
 
         console.log(temp);
         setFilteredData(temp);
+        Array.from(document.querySelectorAll("input")).forEach(
+            input => (input.value = "")
+          );
     }
 
     useEffect(() => {
@@ -203,7 +227,7 @@ function AdvertListing() {
                             <Button as={Col} className="buttons1" variant="primary" onClick={clearSearch}>
                                 Clear Filter
                             </Button>
-                            <Button as={Col} className="buttons2" variant="primary" onClick={handleSearch}>
+                            <Button as={Col} type="submit" className="buttons2" variant="primary" onClick={handleSearch}>
                                 Search
                             </Button>
                         </Row>

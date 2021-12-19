@@ -16,6 +16,8 @@ let mail = "";
 let advert;
 let uid;
 
+
+
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -290,6 +292,7 @@ app.post("/advertCreation", (req, res) => {
     const carmodel = req.body.carmodel;
     const price = req.body.price;
     const adate = req.body.adate;
+    const motorcycle = req.body.motorcycle;
 
     const sqlSelect = "SELECT users.uid FROM users WHERE uemail = ?";
     db.query(sqlSelect, [mail], (err, result) => { 
@@ -297,8 +300,8 @@ app.post("/advertCreation", (req, res) => {
         uid = result[0].uid;
 
         if(destination != "" && departureTime != "" && arrivalTime != "" && departure != "" && carmodel != "" && price != "" && adate != "") {
-            const sqlInsert = "INSERT INTO advert (destination, deptime, departure, carmodel, price, adate, arrtime, uID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            db.query(sqlInsert, [destination, departureTime, departure, carmodel, price, adate, arrivalTime, uid], (err, result) => { 
+            const sqlInsert = "INSERT INTO advert (destination, deptime, departure, carmodel, price, adate, arrtime, uID, motorcycle) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            db.query(sqlInsert, [destination, departureTime, departure, carmodel, price, adate, arrivalTime, uid, motorcycle], (err, result) => { 
                 console.log(result, err);
                 res.send({ message: "Successful" });
             });
