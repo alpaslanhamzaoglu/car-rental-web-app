@@ -5,6 +5,7 @@ import './home.css';
 import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
 import { Form, Row, Button, Col, Dropdown } from 'react-bootstrap';
 
 import Switch from '@mui/material/Switch';
@@ -30,6 +31,8 @@ document.body.style.background = "#9caeff"
 function Home() {
     const navigate = useNavigate();
 
+    const [log, setLog] = useState();
+
 
     const theme = createTheme(theme, {
         typography: {
@@ -43,8 +46,18 @@ function Home() {
         const response = await fetch('http://localhost:3001/logout');
         const data = await response.json();
 
-        console.log(data);
+        window.location.reload(false);
     };
+
+    let request = async () => {
+        const response = await fetch('http://localhost:3001/logged');
+        const data = await response.json();
+        setLog(data);
+    }
+    
+    useEffect(() => {
+        request();
+    }, [])
 
     const pages = ['Create an Advert', 'Adverts Listing', 'Car Rental'];
     const settings = ['Login', 'Register', 'Profile', 'Logout'];
