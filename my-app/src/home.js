@@ -52,8 +52,10 @@ function Home() {
     let request = async () => {
         const response = await fetch('http://localhost:3001/logged');
         const data = await response.json();
+        
+        console.log(data);
         setLog(data);
-    }
+    };
     
     useEffect(() => {
         request();
