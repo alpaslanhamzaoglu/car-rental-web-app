@@ -59,8 +59,11 @@ function Home() {
         request();
     }, [])
 
-    const pages = ['Create an Advert', 'Adverts Listing', 'Car Rental'];
-    const settings = ['Login', 'Register', 'Profile', 'Logout'];
+    const pages_logged = ['Create an Advert', 'Adverts Listing', 'Car Rental'];
+    const settings_logged = ['Profile', 'Logout'];
+
+    const pages_notlog = ['Adverts Listing', 'Car Rental'];
+    const settings_notlog = ['Login', 'Register'];
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -200,11 +203,16 @@ function Home() {
                                             display: { xs: 'block', md: 'none' },
                                         }}
                                     >
-                                        {pages.map((page) => (
+                                        {log ? pages_logged.map((page) => (
                                             <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
                                             <Typography textAlign="center">{page}</Typography>
                                             </MenuItem>
-                                        ))}
+                                            )) : pages_notlog.map((page) => (
+                                                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
+                                                <Typography textAlign="center">{page}</Typography>
+                                                </MenuItem>
+                                            ))
+                                        }
                                     </Menu>
                                 </Box>
                                 <Typography
@@ -217,15 +225,24 @@ function Home() {
                                     AGA Carpooling
                                 </Typography>
                                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                                    {pages.map((page) => (
-                                    <Button
-                                        key={page}
-                                        onClick={() => handleCloseNavMenu(page)}
-                                        sx={{ my: 2, color: 'white', display: 'block' }}
-                                    >
-                                        {page}
-                                    </Button>
-                                    ))}
+                                    {log ? pages_logged.map((page) => (
+                                        <Button
+                                            key={page}
+                                            onClick={() => handleCloseNavMenu(page)}
+                                            sx={{ my: 2, color: 'white', display: 'block' }}
+                                        >
+                                            {page}
+                                        </Button>
+                                        )) : pages_notlog.map((page) => (
+                                            <Button
+                                                key={page}
+                                                onClick={() => handleCloseNavMenu(page)}
+                                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                            >
+                                                {page}
+                                            </Button>
+                                        ))
+                                    }
                                 </Box>
                         
                                 <Box sx={{ flexGrow: 0 }}>
@@ -250,11 +267,16 @@ function Home() {
                                     open={Boolean(anchorElUser)}
                                     onClose={handleCloseUserMenu}
                                     >
-                                    {settings.map((setting) => (
+                                    {log ? settings_logged.map((setting) => (
                                         <MenuItem key={setting} onClick={() => handleCloseNavMenu(setting)}>
                                         <Typography textAlign="center">{setting}</Typography>
                                         </MenuItem>
-                                    ))}
+                                        )) : settings_notlog.map((setting) => (
+                                            <MenuItem key={setting} onClick={() => handleCloseNavMenu(setting)}>
+                                            <Typography textAlign="center">{setting}</Typography>
+                                            </MenuItem>
+                                        ))
+                                    }
                                     </Menu>
                                 </Box>
                             </Toolbar>
