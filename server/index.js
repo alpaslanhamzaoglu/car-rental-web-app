@@ -345,6 +345,14 @@ app.get("/deneme", (req, res) => {
 
 app.get("/logout", (req, res) => {
     mail = "";
+    res.send({ message: "Logged out" });
+});
+
+app.get("/logged", (req, res) => {
+    if(mail == "")
+        res.send(false);
+    else
+        res.send(true);
 });
 
 app.post("/filterSearch", (req, res) => {

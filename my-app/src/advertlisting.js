@@ -68,27 +68,29 @@ function AdvertListing() {
         setActiveSearch();
         setFilteredData(adverts);
 
+        let temp = adverts;
+
         if(count_ < 1 && state != null) {
             getState();
         }
         
         if(destination !== "") {
             let arr = [];
-            for(let i = 0; i < filteredData.length; i++) {
-                if(filteredData[i].destination.includes(destination)) {
-                    arr.push(filteredData[i]);
+            for(let i = 0; i < temp.length; i++) {
+                if(temp[i].destination.includes(destination)) {
+                    arr.push(temp[i]);
                 }
             }
-            setFilteredData(arr);
+            temp = arr;
         }
         if(departure !== "") {
             let arr = [];
-            for(let i = 0; i < filteredData.length; i++) {
-                if(filteredData[i].departure.includes(departure)) {
-                    arr.push(filteredData[i]);
+            for(let i = 0; i < temp.length; i++) {
+                if(temp[i].departure.includes(departure)) {
+                    arr.push(temp[i]);
                 }
             }
-            setFilteredData(arr);
+            temp = arr;
         }
         if(adate !== "") {
             let inputYear = parseInt(adate.substring(0, 4));
@@ -96,19 +98,21 @@ function AdvertListing() {
             let inputDay = parseInt(adate.substring(8, 10));
 
             let arr = [];
-            for(let i = 0; i < filteredData.length; i++) {
-                let tempYear = parseInt(filteredData[i].adate.substring(0, 4));
-                let tempMonth = parseInt(filteredData[i].adate.substring(5, 7));
-                let tempDay = parseInt(filteredData[i].adate.substring(8, 10));
+            for(let i = 0; i < temp.length; i++) {
+                let tempYear = parseInt(temp[i].adate.substring(0, 4));
+                let tempMonth = parseInt(temp[i].adate.substring(5, 7));
+                let tempDay = parseInt(temp[i].adate.substring(8, 10));
 
                 if(inputYear === tempYear && inputMonth === tempMonth && inputDay === tempDay) {
 
-                    arr.push(filteredData[i]);
+                    arr.push(temp[i]);
                 }
             }
-            setFilteredData(arr);
+            temp = arr;
         }
-        console.log(filteredData);
+
+        console.log(temp);
+        setFilteredData(temp);
     }
 
     useEffect(() => {
