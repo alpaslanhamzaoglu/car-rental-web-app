@@ -5,6 +5,7 @@ import './home.css';
 import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
 import { Form, Row, Button, Col, Dropdown } from 'react-bootstrap';
 
 import Switch from '@mui/material/Switch';
@@ -30,6 +31,8 @@ document.body.style.background = "#9caeff"
 function Home() {
     const navigate = useNavigate();
 
+    const [log, setLog] = useState();
+
 
     const theme = createTheme(theme, {
         typography: {
@@ -39,8 +42,30 @@ function Home() {
         }
     });
 
-    const pages = ['Create an Advert', 'Adverts Listing', 'Car Rental'];
-    const settings = ['Login', 'Register', 'Profile', 'Logout'];
+    let logout = async () => {
+        const response = await fetch('http://localhost:3001/logout');
+        const data = await response.json();
+
+        window.location.reload(false);
+    };
+
+    let request = async () => {
+        const response = await fetch('http://localhost:3001/logged');
+        const data = await response.json();
+        
+        console.log(data);
+        setLog(data);
+    };
+    
+    useEffect(() => {
+        request();
+    }, [])
+
+    const pages_logged = ['Create an Advert', 'Adverts Listing', 'Car Rental'];
+    const settings_logged = ['Profile', 'Logout'];
+
+    const pages_notlog = ['Adverts Listing', 'Car Rental'];
+    const settings_notlog = ['Login', 'Register'];
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -73,6 +98,9 @@ function Home() {
         }
         if(namePage === 'Profile'){
             navigate("/profile");
+        }
+        if(namePage == 'Logout'){
+            logout();
         }
     };
 
@@ -177,11 +205,16 @@ function Home() {
                                             display: { xs: 'block', md: 'none' },
                                         }}
                                     >
-                                        {pages.map((page) => (
+                                        {log ? pages_logged.map((page) => (
                                             <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
                                             <Typography textAlign="center">{page}</Typography>
                                             </MenuItem>
-                                        ))}
+                                            )) : pages_notlog.map((page) => (
+                                                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
+                                                <Typography textAlign="center">{page}</Typography>
+                                                </MenuItem>
+                                            ))
+                                        }
                                     </Menu>
                                 </Box>
                                 <Typography
@@ -194,21 +227,30 @@ function Home() {
                                     AGA Carpooling
                                 </Typography>
                                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                                    {pages.map((page) => (
-                                    <Button
-                                        key={page}
-                                        onClick={() => handleCloseNavMenu(page)}
-                                        sx={{ my: 2, color: 'white', display: 'block' }}
-                                    >
-                                        {page}
-                                    </Button>
-                                    ))}
+                                    {log ? pages_logged.map((page) => (
+                                        <Button
+                                            key={page}
+                                            onClick={() => handleCloseNavMenu(page)}
+                                            sx={{ my: 2, color: 'white', display: 'block' }}
+                                        >
+                                            {page}
+                                        </Button>
+                                        )) : pages_notlog.map((page) => (
+                                            <Button
+                                                key={page}
+                                                onClick={() => handleCloseNavMenu(page)}
+                                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                            >
+                                                {page}
+                                            </Button>
+                                        ))
+                                    }
                                 </Box>
                         
                                 <Box sx={{ flexGrow: 0 }}>
                                     <Tooltip title="Open settings">
                                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                        <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                        <Avatar alt="User" src="/static/images/avatar/2.jpg" />
                                     </IconButton>
                                     </Tooltip>
                                     <Menu
@@ -227,11 +269,16 @@ function Home() {
                                     open={Boolean(anchorElUser)}
                                     onClose={handleCloseUserMenu}
                                     >
-                                    {settings.map((setting) => (
+                                    {log ? settings_logged.map((setting) => (
                                         <MenuItem key={setting} onClick={() => handleCloseNavMenu(setting)}>
                                         <Typography textAlign="center">{setting}</Typography>
                                         </MenuItem>
-                                    ))}
+                                        )) : settings_notlog.map((setting) => (
+                                            <MenuItem key={setting} onClick={() => handleCloseNavMenu(setting)}>
+                                            <Typography textAlign="center">{setting}</Typography>
+                                            </MenuItem>
+                                        ))
+                                    }
                                     </Menu>
                                 </Box>
                             </Toolbar>

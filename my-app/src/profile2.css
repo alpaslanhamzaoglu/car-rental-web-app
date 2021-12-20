@@ -61,3 +61,14 @@
     margin-top: 5%;
     text-align: center;
   }
+
+  #comments {
+    padding-top: 3%;
+    padding-left: 28%;
+  }
+
+  #commentbox {
+    padding-top: 5%;
+    padding-left: 28%;
+    padding-right: 30%;
+  }

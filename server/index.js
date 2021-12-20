@@ -16,6 +16,8 @@ let mail = "";
 let advert;
 let uid;
 
+
+
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -48,6 +50,8 @@ app.post("/login", (req, res) => {
     const password = req.body.password;
     const sqlInsert = "SELECT * FROM users WHERE uemail = ? AND password = ?";
 
+    console.log(uid);
+
     db.query(sqlInsert, [uemail, password], (err, result) => {
         if (err) {
             console.log("error");
@@ -61,6 +65,32 @@ app.post("/login", (req, res) => {
             res.send({ message: "Wrong username/password combination" });
         }
     });
+});
+
+app.post("/addcomment", (req, res) => {
+    const comment = req.body.comment;
+
+    if(comment == "") {
+        res.send({ message: "No Comment" });
+    } else {
+        const sqlSelect = "SELECT * FROM users WHERE uemail = ?";
+        db.query(sqlSelect, [mail], (err, result) => {
+            if(err) {
+                console.log("error");
+                res.send({ err: err });
+            }
+            console.log(result);
+            let id = result[0].uID;
+            const sqlInsert = "INSERT INTO review (uID, comment, userid) VALUES (?, ?, ?)";
+            db.query(sqlInsert, [uid, comment, id], (err, result) => {
+                if(err) {
+                    console.log("error");
+                    res.send({ err: err });
+                }
+                res.send({ message: "Successful" });
+            });
+        });
+    }
 });
 
 app.post("/buy", (req, res) => {
@@ -262,6 +292,7 @@ app.post("/advertCreation", (req, res) => {
     const carmodel = req.body.carmodel;
     const price = req.body.price;
     const adate = req.body.adate;
+    const motorcycle = req.body.motorcycle;
 
     const sqlSelect = "SELECT users.uid FROM users WHERE uemail = ?";
     db.query(sqlSelect, [mail], (err, result) => { 
@@ -269,8 +300,8 @@ app.post("/advertCreation", (req, res) => {
         uid = result[0].uid;
 
         if(destination != "" && departureTime != "" && arrivalTime != "" && departure != "" && carmodel != "" && price != "" && adate != "") {
-            const sqlInsert = "INSERT INTO advert (destination, deptime, departure, carmodel, price, adate, arrtime, uID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            db.query(sqlInsert, [destination, departureTime, departure, carmodel, price, adate, arrivalTime, uid], (err, result) => { 
+            const sqlInsert = "INSERT INTO advert (destination, deptime, departure, carmodel, price, adate, arrtime, uID, motorcycle) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            db.query(sqlInsert, [destination, departureTime, departure, carmodel, price, adate, arrivalTime, uid, motorcycle], (err, result) => { 
                 console.log(result, err);
                 res.send({ message: "Successful" });
             });
@@ -292,6 +323,13 @@ app.get("/listing", (req, res) => {
     });
 });
 
+app.get("/reviews", (req, res) => {
+    const sqlSelect = "SELECT * FROM review WHERE uid = ?";
+    db.query(sqlSelect, [uid], (err, result) => {
+        res.send(result);
+    });
+});
+
 app.get("/carListing", (req, res) => {
     const sqlInsert = "SELECT * FROM rentcars";
     db.query(sqlInsert, [], (err, result) => {
@@ -306,6 +344,18 @@ app.get("/carListing", (req, res) => {
 
 app.get("/deneme", (req, res) => {
     res.send(advert);
+});
+
+app.get("/logout", (req, res) => {
+    mail = "";
+    res.send({ message: "Logged out" });
+});
+
+app.get("/logged", (req, res) => {
+    if(mail == "")
+        res.send(false);
+    else
+        res.send(true);
 });
 
 app.post("/filterSearch", (req, res) => {
@@ -332,6 +382,19 @@ app.post("/purchase", (req, res) => {
 app.post("/sendid", (req, res) => {
     uid = req.body.uid;
     res.send({ message: "Success" });
+});
+
+app.post("/getname", (req, res) => {
+    const sqlInsert = "SELECT * FROM users WHERE uid = ?"
+    db.query(sqlInsert, [req.body.uid], (err, result) => {
+        if(err) {
+            console.log(err);
+        }
+
+        if(result) {
+            res.send({ name: result[0].uname });
+        }
+    });
 });
 
 app.listen(3001, () => {

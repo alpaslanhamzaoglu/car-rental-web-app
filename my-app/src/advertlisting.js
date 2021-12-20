@@ -40,6 +40,7 @@ function AdvertListing() {
 
         setAdverts(data);
         setFilteredData(data);
+        console.log(data[0].motorcycle);
     }
 
     const clearSearch = () => {
@@ -68,27 +69,49 @@ function AdvertListing() {
         setActiveSearch();
         setFilteredData(adverts);
 
+        let temp = adverts;
+
         if(count_ < 1 && state != null) {
             getState();
+        }
+
+        if(!motorcycleCheck) {
+            let arr = [];
+            for(let i = 0; i < filteredData.length; i++) {
+                if(filteredData[i].motorcycle == 0) {
+                    arr.push(temp[i]);
+                }
+            }
+            temp = arr;
+        }
+
+        if(motorcycleCheck) {
+            let arr = [];
+            for(let i = 0; i < filteredData.length; i++) {
+                if(filteredData[i].motorcycle == 1) {
+                    arr.push(temp[i]);
+                }
+            }
+            temp = arr;
         }
         
         if(destination !== "") {
             let arr = [];
-            for(let i = 0; i < filteredData.length; i++) {
-                if(filteredData[i].destination.includes(destination)) {
-                    arr.push(filteredData[i]);
+            for(let i = 0; i < temp.length; i++) {
+                if(temp[i].destination.includes(destination)) {
+                    arr.push(temp[i]);
                 }
             }
-            setFilteredData(arr);
+            temp = arr;
         }
         if(departure !== "") {
             let arr = [];
-            for(let i = 0; i < filteredData.length; i++) {
-                if(filteredData[i].departure.includes(departure)) {
-                    arr.push(filteredData[i]);
+            for(let i = 0; i < temp.length; i++) {
+                if(temp[i].departure.includes(departure)) {
+                    arr.push(temp[i]);
                 }
             }
-            setFilteredData(arr);
+            temp = arr;
         }
         if(adate !== "") {
             let inputYear = parseInt(adate.substring(0, 4));
@@ -96,19 +119,24 @@ function AdvertListing() {
             let inputDay = parseInt(adate.substring(8, 10));
 
             let arr = [];
-            for(let i = 0; i < filteredData.length; i++) {
-                let tempYear = parseInt(filteredData[i].adate.substring(0, 4));
-                let tempMonth = parseInt(filteredData[i].adate.substring(5, 7));
-                let tempDay = parseInt(filteredData[i].adate.substring(8, 10));
+            for(let i = 0; i < temp.length; i++) {
+                let tempYear = parseInt(temp[i].adate.substring(0, 4));
+                let tempMonth = parseInt(temp[i].adate.substring(5, 7));
+                let tempDay = parseInt(temp[i].adate.substring(8, 10));
 
                 if(inputYear === tempYear && inputMonth === tempMonth && inputDay === tempDay) {
 
-                    arr.push(filteredData[i]);
+                    arr.push(temp[i]);
                 }
             }
-            setFilteredData(arr);
+            temp = arr;
         }
-        console.log(filteredData);
+
+        console.log(temp);
+        setFilteredData(temp);
+        Array.from(document.querySelectorAll("input")).forEach(
+            input => (input.value = "")
+          );
     }
 
     useEffect(() => {
@@ -199,7 +227,7 @@ function AdvertListing() {
                             <Button as={Col} className="buttons1" variant="primary" onClick={clearSearch}>
                                 Clear Filter
                             </Button>
-                            <Button as={Col} className="buttons2" variant="primary" onClick={handleSearch}>
+                            <Button as={Col} type="submit" className="buttons2" variant="primary" onClick={handleSearch}>
                                 Search
                             </Button>
                         </Row>
