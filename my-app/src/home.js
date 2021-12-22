@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './home.css';
 import { Link } from "react-router-dom";
-import backgroundH from "./backgif.gif";
+import backgroundH from "./backgif3.gif";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Form, Row, Button, Col } from 'react-bootstrap';

@@ -72,7 +72,7 @@ function Register() {
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
                                 <Form.Group className="passwordrepeat" controlId="formBasicPassword">
-                                    <Form.Control type="password" placeholder="Repeat Password" onChange={(e) => { setPassRepeat(e.target.value) }} />
+                                    <Form.Control type="password" placeholder="Repeat Password" minLength="8" onChange={(e) => { setPassRepeat(e.target.value) }} />
                                 </Form.Group>
                             </Col>
                         </Row>
