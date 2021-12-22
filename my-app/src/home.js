@@ -32,6 +32,7 @@ function Home() {
     const navigate = useNavigate();
 
     const [log, setLog] = useState();
+    const [name, setName] = useState();
 
 
     const theme = createTheme(theme, {
@@ -56,9 +57,18 @@ function Home() {
         console.log(data);
         setLog(data);
     };
+
+    let request2 = async () => {
+        const response = await fetch('http://localhost:3001/home');
+        const data = await response.json();
+        
+        console.log(data.name);
+        setName(data.name);
+    };
     
     useEffect(() => {
         request();
+        request2();
     }, [])
 
     const pages_logged = ['Create an Advert', 'Adverts Listing', 'Car Rental'];
