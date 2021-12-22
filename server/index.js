@@ -397,6 +397,22 @@ app.post("/getname", (req, res) => {
     });
 });
 
+app.get("/home", (req, res) => {
+    const sqlInsert = "SELECT * FROM users WHERE uemail = ?";
+
+    if(mail != "") {
+        db.query(sqlInsert, [mail], (err, result) => {
+            if(err) {
+                console.log(err);
+            }
+
+            if(result) {
+                res.send({ name: result[0].uname });
+            }
+        });
+    }
+});
+
 app.listen(3001, () => {
     console.log("running on port 3001");
 });
