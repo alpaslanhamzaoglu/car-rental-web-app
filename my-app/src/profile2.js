@@ -1,7 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
-import { Button, Row, Container, Col, Card, InputGroup, FormControl } from 'react-bootstrap';
+import { Button, Row, Container, Col, InputGroup, FormControl } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Axios from 'axios'
 import './profile2.css';

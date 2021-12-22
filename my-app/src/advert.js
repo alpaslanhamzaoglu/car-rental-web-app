@@ -22,7 +22,7 @@ function Advert(props) {
 
   const func2 = () => {
     Axios.post("http://localhost:3001/sendid", { uid : props.advert.uID }).then(function (response) {
-      if(response.data.message == "Success") {
+      if(response.data.message === "Success") {
         navigate("/profile2");
       }
     })
@@ -48,7 +48,7 @@ function Advert(props) {
             {name}
           </Card.Text>
           {(() => {
-            if (props.advert.motorcycle == 0) {
+            if (props.advert.motorcycle === 0) {
               return  <Card.Text>
                         Car: {props.advert.carmodel}
                       </Card.Text>;
