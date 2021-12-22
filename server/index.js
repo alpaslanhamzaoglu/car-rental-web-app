@@ -398,17 +398,19 @@ app.post("/getname", (req, res) => {
 });
 
 app.get("/home", (req, res) => {
-    const sqlInsert = "SELECT * FROM users WHERE uemail = ?"
-    db.query(sqlInsert, [uemail], (err, result) => {
-        if (err) {
-            console.log(err);
-        }
+    const sqlInsert = "SELECT * FROM users WHERE uemail = ?";
 
-        if (result) {
-            console.log(result);
-            res.send(result);
-        }
-    });
+    if (mail != "") {
+        db.query(sqlInsert, [mail], (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+
+            if (result) {
+                res.send({ name: result[0].uname });
+            }
+        });
+    }
 });
 
 app.listen(3001, () => {
