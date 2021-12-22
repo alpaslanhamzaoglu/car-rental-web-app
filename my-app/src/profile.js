@@ -129,7 +129,7 @@ function Profile() {
                         <Row className="justify-content-md-center">
                             <Col xs lg="3">
                                 <Form.Group className="registerButton">
-                                    <Button variant="primary" type="submit" className="registerButton" onClick={submitMail}>
+                                    <Button variant="primary" className="registerButton" onClick={submitMail}>
                                         Change
                                     </Button>
                                 </Form.Group>
