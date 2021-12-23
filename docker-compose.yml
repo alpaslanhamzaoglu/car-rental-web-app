@@ -1,10 +1,11 @@
-version: "2.0"
+version: "2.2"
 
-x-common-variables: &common-variables
+x-common-variables:
+  &common-variables
   MYSQL_USER: sampleuser
   MYSQL_PASSWORD: samplepassword
   MYSQL_DATABASE: aga
-  REACT_APP_SERVER_PORT: 8000
+  REACT_APP_SERVER_PORT: 3001
 
 services:
   mysql-db:
@@ -40,7 +41,7 @@ services:
       <<: *common-variables
       MYSQL_HOST_IP: mysql-db
     ports:
-      - 8000:8000
+      - 3001:3001
     volumes:
       - ./server:/app
     links:
