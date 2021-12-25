@@ -56,7 +56,7 @@ function AdvertListing() {
 
     const getState = () => {
         const {destinationS, departureS, adateS, motorcycleCheckS, page} = state;
-        if(page == "home"){
+        if(page === "home"){
             setDestination(destinationS);
             setDeparture(departureS);
             setDate(adateS);
@@ -78,7 +78,7 @@ function AdvertListing() {
         if(!motorcycleCheck) {
             let arr = [];
             for(let i = 0; i < filteredData.length; i++) {
-                if(filteredData[i].motorcycle == 0) {
+                if(filteredData[i].motorcycle === 0) {
                     arr.push(temp[i]);
                 }
             }
@@ -88,7 +88,7 @@ function AdvertListing() {
         if(motorcycleCheck) {
             let arr = [];
             for(let i = 0; i < filteredData.length; i++) {
-                if(filteredData[i].motorcycle == 1) {
+                if(filteredData[i].motorcycle === 1) {
                     arr.push(temp[i]);
                 }
             }

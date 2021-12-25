@@ -11,8 +11,6 @@ document.body.style.background = "#9caeff"
 function CarRental() {
 
     const [adverts, setAdverts] = useState([]);
-    const [filteredData, setFilteredData] = useState(adverts);
-    const [searchActive, setSearch] = useState(false);
 
     let request = async () => {
         const response = await fetch('http://localhost:3001/carListing');
@@ -38,7 +36,7 @@ function CarRental() {
                 </div>
             </div>
 
-            <div className="Adverts" id="advertss">
+            <div className="Adverts" id="advertsss">
                 {(adverts != null) ? adverts.map((advert, index) => <Car key={index} advert={advert} />) : ''}
             </div>
         </div>
