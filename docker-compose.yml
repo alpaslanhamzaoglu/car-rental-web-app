@@ -1,4 +1,4 @@
-version: "2.2"
+version: "2.0"
 
 x-common-variables:
   &common-variables
@@ -59,4 +59,4 @@ services:
       - ./my-app/src:/app/src
     links:
       - server
-    command: npm start
+    command: npm run start
