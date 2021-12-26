@@ -1,7 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
-import { Button, Row, Container, Col, InputGroup, FormControl } from 'react-bootstrap';
+import { Button, Row, Container, Col, InputGroup, FormControl, Card, ListGroup } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Axios from 'axios'
 import './profile2.css';
@@ -67,18 +67,19 @@ function Profile2() {
                 </div>
             </div>
             <div>
-                <Container id="infos">
+            <Container id="infos">
                     <Row className="justify-content-md-center">
-                        <Col xs lg="6">The user name is {name}.</Col>
-                    </Row>
-                    <Row className="justify-content-md-center">
-                        <Col xs lg="6">The user email is {mail}.</Col>
-                    </Row>
-                    <Row className="justify-content-md-center">
-                        <Col xs lg="6">The user info is {info}.</Col>
-                    </Row>
-                    <Row className="justify-content-md-center">
-                        <Col xs lg="6">Number of covid vaccination the user had is {vac - 1}.</Col>
+                        <Col xs lg="12">
+                            <Card style={{ fontSize: 'large' }}>
+                                <Card.Header style={{ fontSize: 'bold' }}>{name}'s informations are listed here. You can make comment about {name} using forms at the bottom.</Card.Header>
+                                <ListGroup variant="flush">
+                                    <ListGroup.Item>The user name is {name}.</ListGroup.Item>
+                                    <ListGroup.Item>The user email is {mail}.</ListGroup.Item>
+                                    <ListGroup.Item>The user info is {info}.</ListGroup.Item>
+                                    <ListGroup.Item>Number of covid vaccination the user had {vac - 1}.</ListGroup.Item>
+                                </ListGroup>
+                            </Card>
+                        </Col>
                     </Row>
                 </Container>
 

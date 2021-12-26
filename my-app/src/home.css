@@ -36,3 +36,8 @@
 #navbar {
     z-index: 2
 }
+
+#deplabel {
+    font-weight: bold;
+    font-size: x-large;
+}

@@ -313,17 +313,17 @@ function Home() {
                     <Form>
                         <Row className="mb-3" id="firstrow">
                             <Form.Group as={Col} controlId="formGridEmail" onChange={(e) => { setDeparture(e.target.value) }}>
-                                <Form.Label>Departure</Form.Label>
+                                <Form.Label id="deplabel">Departure</Form.Label>
                                 <Form.Control type="text" placeholder="Enter where you are going from" />
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="formGridPassword" onChange={(e) => { setDestination(e.target.value) }}>
-                                <Form.Label>Destination</Form.Label>
+                                <Form.Label id="deplabel">Destination</Form.Label>
                                 <Form.Control type="text" placeholder="Enter where you are going to" />
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="formGridZip" onChange={(e) => { setDate(e.target.value) }}>
-                                <Form.Label>Travel date</Form.Label>
+                                <Form.Label id="deplabel">Travel date</Form.Label>
                                 <Form.Control type="date" placeholder="Enter the date of travel" />
                             </Form.Group>
                         </Row>

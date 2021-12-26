@@ -2,8 +2,8 @@ version: "2.2"
 
 x-common-variables:
   &common-variables
-  MYSQL_USER: sampleuser
-  MYSQL_PASSWORD: samplepassword
+  MYSQL_USER: root
+  MYSQL_PASSWORD: root
   MYSQL_DATABASE: aga
   REACT_APP_SERVER_PORT: 3001
 
@@ -27,6 +27,8 @@ services:
     container_name: phpadmin_container
     environment:
       PMA_HOST: mysql-db
+      PMA_USER: root
+      PMA_PASSWORD: root
     links:
       - mysql-db:mysql-db
     ports:

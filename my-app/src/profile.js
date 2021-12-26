@@ -1,7 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Container, Col, FloatingLabel } from 'react-bootstrap';
+import { Form, Button, Row, Container, Col, FloatingLabel, Card, ListGroup } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Axios from 'axios'
 import './profile.css';
@@ -60,16 +60,17 @@ function Profile() {
             <div>
                 <Container id="infos">
                     <Row className="justify-content-md-center">
-                        <Col xs lg="12">Your name is {name}.</Col>
-                    </Row>
-                    <Row className="justify-content-md-center">
-                        <Col xs lg="12">Your email is {mail}.</Col>
-                    </Row>
-                    <Row className="justify-content-md-center">
-                        <Col xs lg="12">Your info is {info}.</Col>
-                    </Row>
-                    <Row className="justify-content-md-center">
-                        <Col xs lg="3">Number of covid vaccination you had is {vac - 1}.</Col>
+                        <Col xs lg="12">
+                            <Card style={{ fontSize: 'large' }}>
+                                <Card.Header style={{ fontSize: 'bold' }}>Your informations are listed here. You can change informations using forms at the bottom.</Card.Header>
+                                <ListGroup variant="flush">
+                                    <ListGroup.Item>Your name: {name}</ListGroup.Item>
+                                    <ListGroup.Item>Your email address: {mail}</ListGroup.Item>
+                                    <ListGroup.Item>Your informations: {info}</ListGroup.Item>
+                                    <ListGroup.Item>Number of covid vaccination: {vac - 1}</ListGroup.Item>
+                                </ListGroup>
+                            </Card>
+                        </Col>
                     </Row>
                 </Container>
             </div>
